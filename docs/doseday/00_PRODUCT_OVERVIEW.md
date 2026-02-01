@@ -1,7 +1,7 @@
-# PED Pal — Product Overview
+# DoseDay — Product Overview
 
 ## Purpose
-PED Pal is an iOS app for tracking medication protocols, administrations (including injections), vitals, and personal observations with:
+DoseDay is an iOS app for tracking medication protocols, administrations (including injections), vitals, and personal observations with:
 - Calendar-first UX for schedule clarity
 - Reminder notifications
 - Per-day timeline view
