@@ -35,10 +35,15 @@ Sections (top to bottom):
     - Drug list with colors + schedules
     - Edit protocol / end date
     - Add drug
-- AddProtocolFlow (wizard style)
-  1) Name + start/end
-  2) Add drugs (repeating)
-  3) Review + Save
+- AddCompoundSheet (sheet, two tabs)
+  - Tab: Single Compound (default)
+    - Drug fields inline (name, route, schedule, reminder, color)
+    - Save → auto-creates a named protocol from drug name
+  - Tab: Protocol
+    - Protocol name + color + dates + notes
+    - Inline drug list with Add Drug button
+    - Save persists immediately; add more drugs later via ProtocolDetailView
+    - No review step
 
 ### Settings
 - Notification permissions + default reminder settings

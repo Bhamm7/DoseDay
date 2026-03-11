@@ -1,0 +1,792 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA001A2B3F8E4C5D6B7A8900 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8901 /* Enums.swift */; };
+		AA001A2B3F8E4C5D6B7A8902 /* ScheduleDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8903 /* ScheduleDefinition.swift */; };
+		AA001A2B3F8E4C5D6B7A8904 /* MedicationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8905 /* MedicationProtocol.swift */; };
+		AA001A2B3F8E4C5D6B7A8906 /* Drug.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8907 /* Drug.swift */; };
+		AA001A2B3F8E4C5D6B7A8908 /* DoseEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8909 /* DoseEvent.swift */; };
+		AA001A2B3F8E4C5D6B7A890A /* DailyVitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A890B /* DailyVitals.swift */; };
+		AA001A2B3F8E4C5D6B7A890C /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A890D /* DailyNote.swift */; };
+		AA001A2B3F8E4C5D6B7A890E /* SchedulingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A890F /* SchedulingService.swift */; };
+		AA001A2B3F8E4C5D6B7A8910 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8911 /* ContentView.swift */; };
+		AA001A2B3F8E4C5D6B7A8912 /* DoseDayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8913 /* DoseDayApp.swift */; };
+		BB001A2B3F8E4C5D6B7A893E /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A8934 /* Color+Hex.swift */; };
+		BB001A2B3F8E4C5D6B7A893F /* StatusPillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A8935 /* StatusPillView.swift */; };
+		BB001A2B3F8E4C5D6B7A8940 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A8936 /* CalendarView.swift */; };
+		BB001A2B3F8E4C5D6B7A8941 /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A8937 /* MonthHeaderView.swift */; };
+		BB001A2B3F8E4C5D6B7A8942 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A8938 /* DayCellView.swift */; };
+		BB001A2B3F8E4C5D6B7A8943 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A8939 /* DayView.swift */; };
+		BB001A2B3F8E4C5D6B7A8944 /* DoseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A893A /* DoseRowView.swift */; };
+		BB001A2B3F8E4C5D6B7A8945 /* DoseEventDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A893B /* DoseEventDetailSheet.swift */; };
+		BB001A2B3F8E4C5D6B7A8946 /* VitalsEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A893C /* VitalsEditorView.swift */; };
+		BB001A2B3F8E4C5D6B7A8947 /* NotesEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001A2B3F8E4C5D6B7A893D /* NotesEditorView.swift */; };
+		CC001A2B3F8E4C5D6B7A8962 /* ProtocolListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001A2B3F8E4C5D6B7A8961 /* ProtocolListView.swift */; };
+		CC001A2B3F8E4C5D6B7A8964 /* ProtocolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001A2B3F8E4C5D6B7A8963 /* ProtocolDetailView.swift */; };
+		CC001A2B3F8E4C5D6B7A8966 /* AddProtocolFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001A2B3F8E4C5D6B7A8965 /* AddProtocolFlow.swift */; };
+		CC001A2B3F8E4C5D6B7A8968 /* DrugEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC001A2B3F8E4C5D6B7A8967 /* DrugEditorView.swift */; };
+		DD001A2B3F8E4C5D6B7A8971 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD001A2B3F8E4C5D6B7A8970 /* NotificationService.swift */; };
+		EE001A2B3F8E4C5D6B7A8982 /* SerumCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE001A2B3F8E4C5D6B7A8981 /* SerumCalculator.swift */; };
+		EE001A2B3F8E4C5D6B7A8984 /* GraphHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE001A2B3F8E4C5D6B7A8983 /* GraphHubView.swift */; };
+		EE001A2B3F8E4C5D6B7A8986 /* SerumEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE001A2B3F8E4C5D6B7A8985 /* SerumEstimateView.swift */; };
+		EE001A2B3F8E4C5D6B7A8988 /* VitalsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE001A2B3F8E4C5D6B7A8987 /* VitalsGraphView.swift */; };
+		FF001A2B3F8E4C5D6B7A8992 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF001A2B3F8E4C5D6B7A8991 /* SettingsView.swift */; };
+		GG001A2B3F8E4C5D6B7A89A0 /* LabResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89A1 /* LabResult.swift */; };
+		GG001A2B3F8E4C5D6B7A89A2 /* SymptomTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89A3 /* SymptomTag.swift */; };
+		GG001A2B3F8E4C5D6B7A89A4 /* DailySymptom.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89A5 /* DailySymptom.swift */; };
+		GG001A2B3F8E4C5D6B7A89A6 /* BodyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89A7 /* BodyMapView.swift */; };
+		GG001A2B3F8E4C5D6B7A89A8 /* LabResultsEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89A9 /* LabResultsEditorView.swift */; };
+		GG001A2B3F8E4C5D6B7A89AA /* SymptomsEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89AB /* SymptomsEditorView.swift */; };
+		GG001A2B3F8E4C5D6B7A89AC /* UnifiedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89AD /* UnifiedGraphView.swift */; };
+		GG001A2B3F8E4C5D6B7A89AE /* SymptomTagManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89AF /* SymptomTagManagerView.swift */; };
+		HH001A2B3F8E4C5D6B7A89B0 /* CompoundLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = HH001A2B3F8E4C5D6B7A89B1 /* CompoundLibraryService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8BD30FE42F5F7F5300CFC420 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BD30FCC2F5F7F5200CFC420 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8BD30FD32F5F7F5200CFC420;
+			remoteInfo = DoseDay;
+		};
+		8BD30FEE2F5F7F5300CFC420 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BD30FCC2F5F7F5200CFC420 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8BD30FD32F5F7F5200CFC420;
+			remoteInfo = DoseDay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8BD30FD42F5F7F5200CFC420 /* DoseDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BD30FE32F5F7F5300CFC420 /* DoseDayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoseDayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BD30FED2F5F7F5300CFC420 /* DoseDayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoseDayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA001A2B3F8E4C5D6B7A8901 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A8903 /* ScheduleDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDefinition.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A8905 /* MedicationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationProtocol.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A8907 /* Drug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drug.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A8909 /* DoseEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseEvent.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A890B /* DailyVitals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyVitals.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A890D /* DailyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNote.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A890F /* SchedulingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingService.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A8911 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA001A2B3F8E4C5D6B7A8913 /* DoseDayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseDayApp.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A8934 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A8935 /* StatusPillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPillView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A8936 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A8937 /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A8938 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A8939 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A893A /* DoseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseRowView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A893B /* DoseEventDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseEventDetailSheet.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A893C /* VitalsEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsEditorView.swift; sourceTree = "<group>"; };
+		BB001A2B3F8E4C5D6B7A893D /* NotesEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesEditorView.swift; sourceTree = "<group>"; };
+		CC001A2B3F8E4C5D6B7A8961 /* ProtocolListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolListView.swift; sourceTree = "<group>"; };
+		CC001A2B3F8E4C5D6B7A8963 /* ProtocolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetailView.swift; sourceTree = "<group>"; };
+		CC001A2B3F8E4C5D6B7A8965 /* AddProtocolFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProtocolFlow.swift; sourceTree = "<group>"; };
+		CC001A2B3F8E4C5D6B7A8967 /* DrugEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrugEditorView.swift; sourceTree = "<group>"; };
+		DD001A2B3F8E4C5D6B7A8970 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		EE001A2B3F8E4C5D6B7A8981 /* SerumCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerumCalculator.swift; sourceTree = "<group>"; };
+		EE001A2B3F8E4C5D6B7A8983 /* GraphHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphHubView.swift; sourceTree = "<group>"; };
+		EE001A2B3F8E4C5D6B7A8985 /* SerumEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerumEstimateView.swift; sourceTree = "<group>"; };
+		EE001A2B3F8E4C5D6B7A8987 /* VitalsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsGraphView.swift; sourceTree = "<group>"; };
+		FF001A2B3F8E4C5D6B7A8991 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89A1 /* LabResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabResult.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89A3 /* SymptomTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomTag.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89A5 /* DailySymptom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySymptom.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89A7 /* BodyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMapView.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89A9 /* LabResultsEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabResultsEditorView.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89AB /* SymptomsEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsEditorView.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89AD /* UnifiedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedGraphView.swift; sourceTree = "<group>"; };
+		GG001A2B3F8E4C5D6B7A89AF /* SymptomTagManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomTagManagerView.swift; sourceTree = "<group>"; };
+		HH001A2B3F8E4C5D6B7A89B1 /* CompoundLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundLibraryService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8BD30FD12F5F7F5200CFC420 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD30FE02F5F7F5300CFC420 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD30FEA2F5F7F5300CFC420 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8BD30FCB2F5F7F5200CFC420 = {
+			isa = PBXGroup;
+			children = (
+				AA001A2B3F8E4C5D6B7A8920 /* doseday */,
+				8BD30FD52F5F7F5200CFC420 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8BD30FD52F5F7F5200CFC420 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8BD30FD42F5F7F5200CFC420 /* DoseDay.app */,
+				8BD30FE32F5F7F5300CFC420 /* DoseDayTests.xctest */,
+				8BD30FED2F5F7F5300CFC420 /* DoseDayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA001A2B3F8E4C5D6B7A8920 /* doseday */ = {
+			isa = PBXGroup;
+			children = (
+				AA001A2B3F8E4C5D6B7A8911 /* ContentView.swift */,
+				AA001A2B3F8E4C5D6B7A8913 /* DoseDayApp.swift */,
+				AA001A2B3F8E4C5D6B7A8921 /* Models */,
+				AA001A2B3F8E4C5D6B7A8922 /* Services */,
+				BB001A2B3F8E4C5D6B7A8930 /* Views */,
+			);
+			path = doseday;
+			sourceTree = "<group>";
+		};
+		AA001A2B3F8E4C5D6B7A8921 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA001A2B3F8E4C5D6B7A8901 /* Enums.swift */,
+				AA001A2B3F8E4C5D6B7A8903 /* ScheduleDefinition.swift */,
+				AA001A2B3F8E4C5D6B7A8905 /* MedicationProtocol.swift */,
+				AA001A2B3F8E4C5D6B7A8907 /* Drug.swift */,
+				AA001A2B3F8E4C5D6B7A8909 /* DoseEvent.swift */,
+				AA001A2B3F8E4C5D6B7A890B /* DailyVitals.swift */,
+				AA001A2B3F8E4C5D6B7A890D /* DailyNote.swift */,
+				GG001A2B3F8E4C5D6B7A89A1 /* LabResult.swift */,
+				GG001A2B3F8E4C5D6B7A89A3 /* SymptomTag.swift */,
+				GG001A2B3F8E4C5D6B7A89A5 /* DailySymptom.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA001A2B3F8E4C5D6B7A8922 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA001A2B3F8E4C5D6B7A890F /* SchedulingService.swift */,
+				DD001A2B3F8E4C5D6B7A8970 /* NotificationService.swift */,
+				EE001A2B3F8E4C5D6B7A8981 /* SerumCalculator.swift */,
+				HH001A2B3F8E4C5D6B7A89B1 /* CompoundLibraryService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BB001A2B3F8E4C5D6B7A8930 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB001A2B3F8E4C5D6B7A8931 /* Shared */,
+				BB001A2B3F8E4C5D6B7A8932 /* Calendar */,
+				BB001A2B3F8E4C5D6B7A8933 /* Day */,
+				CC001A2B3F8E4C5D6B7A8960 /* Protocols */,
+				EE001A2B3F8E4C5D6B7A8980 /* Graphs */,
+				FF001A2B3F8E4C5D6B7A8990 /* Settings */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BB001A2B3F8E4C5D6B7A8931 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BB001A2B3F8E4C5D6B7A8934 /* Color+Hex.swift */,
+				BB001A2B3F8E4C5D6B7A8935 /* StatusPillView.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BB001A2B3F8E4C5D6B7A8932 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				BB001A2B3F8E4C5D6B7A8936 /* CalendarView.swift */,
+				BB001A2B3F8E4C5D6B7A8937 /* MonthHeaderView.swift */,
+				BB001A2B3F8E4C5D6B7A8938 /* DayCellView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		BB001A2B3F8E4C5D6B7A8933 /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				BB001A2B3F8E4C5D6B7A8939 /* DayView.swift */,
+				BB001A2B3F8E4C5D6B7A893A /* DoseRowView.swift */,
+				BB001A2B3F8E4C5D6B7A893B /* DoseEventDetailSheet.swift */,
+				BB001A2B3F8E4C5D6B7A893C /* VitalsEditorView.swift */,
+				BB001A2B3F8E4C5D6B7A893D /* NotesEditorView.swift */,
+				GG001A2B3F8E4C5D6B7A89A7 /* BodyMapView.swift */,
+				GG001A2B3F8E4C5D6B7A89A9 /* LabResultsEditorView.swift */,
+				GG001A2B3F8E4C5D6B7A89AB /* SymptomsEditorView.swift */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
+		CC001A2B3F8E4C5D6B7A8960 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CC001A2B3F8E4C5D6B7A8961 /* ProtocolListView.swift */,
+				CC001A2B3F8E4C5D6B7A8963 /* ProtocolDetailView.swift */,
+				CC001A2B3F8E4C5D6B7A8965 /* AddProtocolFlow.swift */,
+				CC001A2B3F8E4C5D6B7A8967 /* DrugEditorView.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		EE001A2B3F8E4C5D6B7A8980 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				EE001A2B3F8E4C5D6B7A8983 /* GraphHubView.swift */,
+				EE001A2B3F8E4C5D6B7A8985 /* SerumEstimateView.swift */,
+				EE001A2B3F8E4C5D6B7A8987 /* VitalsGraphView.swift */,
+				GG001A2B3F8E4C5D6B7A89AD /* UnifiedGraphView.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		FF001A2B3F8E4C5D6B7A8990 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FF001A2B3F8E4C5D6B7A8991 /* SettingsView.swift */,
+				GG001A2B3F8E4C5D6B7A89AF /* SymptomTagManagerView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8BD30FD32F5F7F5200CFC420 /* DoseDay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BD30FF72F5F7F5300CFC420 /* Build configuration list for PBXNativeTarget "DoseDay" */;
+			buildPhases = (
+				8BD30FD02F5F7F5200CFC420 /* Sources */,
+				8BD30FD12F5F7F5200CFC420 /* Frameworks */,
+				8BD30FD22F5F7F5200CFC420 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DoseDay;
+			packageProductDependencies = (
+			);
+			productName = DoseDay;
+			productReference = 8BD30FD42F5F7F5200CFC420 /* DoseDay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8BD30FE22F5F7F5300CFC420 /* DoseDayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BD30FFA2F5F7F5300CFC420 /* Build configuration list for PBXNativeTarget "DoseDayTests" */;
+			buildPhases = (
+				8BD30FDF2F5F7F5300CFC420 /* Sources */,
+				8BD30FE02F5F7F5300CFC420 /* Frameworks */,
+				8BD30FE12F5F7F5300CFC420 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BD30FE52F5F7F5300CFC420 /* PBXTargetDependency */,
+			);
+			name = DoseDayTests;
+			packageProductDependencies = (
+			);
+			productName = DoseDayTests;
+			productReference = 8BD30FE32F5F7F5300CFC420 /* DoseDayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8BD30FEC2F5F7F5300CFC420 /* DoseDayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BD30FFD2F5F7F5300CFC420 /* Build configuration list for PBXNativeTarget "DoseDayUITests" */;
+			buildPhases = (
+				8BD30FE92F5F7F5300CFC420 /* Sources */,
+				8BD30FEA2F5F7F5300CFC420 /* Frameworks */,
+				8BD30FEB2F5F7F5300CFC420 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BD30FEF2F5F7F5300CFC420 /* PBXTargetDependency */,
+			);
+			name = DoseDayUITests;
+			packageProductDependencies = (
+			);
+			productName = DoseDayUITests;
+			productReference = 8BD30FED2F5F7F5300CFC420 /* DoseDayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8BD30FCC2F5F7F5200CFC420 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					8BD30FD32F5F7F5200CFC420 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					8BD30FE22F5F7F5300CFC420 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 8BD30FD32F5F7F5200CFC420;
+					};
+					8BD30FEC2F5F7F5300CFC420 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 8BD30FD32F5F7F5200CFC420;
+					};
+				};
+			};
+			buildConfigurationList = 8BD30FCF2F5F7F5200CFC420 /* Build configuration list for PBXProject "DoseDay" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8BD30FCB2F5F7F5200CFC420;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8BD30FD52F5F7F5200CFC420 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8BD30FD32F5F7F5200CFC420 /* DoseDay */,
+				8BD30FE22F5F7F5300CFC420 /* DoseDayTests */,
+				8BD30FEC2F5F7F5300CFC420 /* DoseDayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8BD30FD22F5F7F5200CFC420 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD30FE12F5F7F5300CFC420 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD30FEB2F5F7F5300CFC420 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8BD30FD02F5F7F5200CFC420 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA001A2B3F8E4C5D6B7A8910 /* ContentView.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A8912 /* DoseDayApp.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A8900 /* Enums.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A8902 /* ScheduleDefinition.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A8904 /* MedicationProtocol.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A8906 /* Drug.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A8908 /* DoseEvent.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A890A /* DailyVitals.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A890C /* DailyNote.swift in Sources */,
+				AA001A2B3F8E4C5D6B7A890E /* SchedulingService.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A893E /* Color+Hex.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A893F /* StatusPillView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8940 /* CalendarView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8941 /* MonthHeaderView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8942 /* DayCellView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8943 /* DayView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8944 /* DoseRowView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8945 /* DoseEventDetailSheet.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8946 /* VitalsEditorView.swift in Sources */,
+				BB001A2B3F8E4C5D6B7A8947 /* NotesEditorView.swift in Sources */,
+				CC001A2B3F8E4C5D6B7A8962 /* ProtocolListView.swift in Sources */,
+				CC001A2B3F8E4C5D6B7A8964 /* ProtocolDetailView.swift in Sources */,
+				CC001A2B3F8E4C5D6B7A8966 /* AddProtocolFlow.swift in Sources */,
+				CC001A2B3F8E4C5D6B7A8968 /* DrugEditorView.swift in Sources */,
+				DD001A2B3F8E4C5D6B7A8971 /* NotificationService.swift in Sources */,
+				EE001A2B3F8E4C5D6B7A8982 /* SerumCalculator.swift in Sources */,
+				EE001A2B3F8E4C5D6B7A8984 /* GraphHubView.swift in Sources */,
+				EE001A2B3F8E4C5D6B7A8986 /* SerumEstimateView.swift in Sources */,
+				EE001A2B3F8E4C5D6B7A8988 /* VitalsGraphView.swift in Sources */,
+				FF001A2B3F8E4C5D6B7A8992 /* SettingsView.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89A0 /* LabResult.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89A2 /* SymptomTag.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89A4 /* DailySymptom.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89A6 /* BodyMapView.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89A8 /* LabResultsEditorView.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89AA /* SymptomsEditorView.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89AC /* UnifiedGraphView.swift in Sources */,
+				GG001A2B3F8E4C5D6B7A89AE /* SymptomTagManagerView.swift in Sources */,
+				HH001A2B3F8E4C5D6B7A89B0 /* CompoundLibraryService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD30FDF2F5F7F5300CFC420 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD30FE92F5F7F5300CFC420 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8BD30FE52F5F7F5300CFC420 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8BD30FD32F5F7F5200CFC420 /* DoseDay */;
+			targetProxy = 8BD30FE42F5F7F5300CFC420 /* PBXContainerItemProxy */;
+		};
+		8BD30FEF2F5F7F5300CFC420 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8BD30FD32F5F7F5200CFC420 /* DoseDay */;
+			targetProxy = 8BD30FEE2F5F7F5300CFC420 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8BD30FF52F5F7F5300CFC420 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8BD30FF62F5F7F5300CFC420 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8BD30FF82F5F7F5300CFC420 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Brett.DoseDay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8BD30FF92F5F7F5300CFC420 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Brett.DoseDay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8BD30FFB2F5F7F5300CFC420 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Brett.DoseDayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoseDay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DoseDay";
+			};
+			name = Debug;
+		};
+		8BD30FFC2F5F7F5300CFC420 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Brett.DoseDayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoseDay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DoseDay";
+			};
+			name = Release;
+		};
+		8BD30FFE2F5F7F5300CFC420 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Brett.DoseDayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DoseDay;
+			};
+			name = Debug;
+		};
+		8BD30FFF2F5F7F5300CFC420 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS8F72NQ86;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Brett.DoseDayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DoseDay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8BD30FCF2F5F7F5200CFC420 /* Build configuration list for PBXProject "DoseDay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BD30FF52F5F7F5300CFC420 /* Debug */,
+				8BD30FF62F5F7F5300CFC420 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BD30FF72F5F7F5300CFC420 /* Build configuration list for PBXNativeTarget "DoseDay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BD30FF82F5F7F5300CFC420 /* Debug */,
+				8BD30FF92F5F7F5300CFC420 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BD30FFA2F5F7F5300CFC420 /* Build configuration list for PBXNativeTarget "DoseDayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BD30FFB2F5F7F5300CFC420 /* Debug */,
+				8BD30FFC2F5F7F5300CFC420 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BD30FFD2F5F7F5300CFC420 /* Build configuration list for PBXNativeTarget "DoseDayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BD30FFE2F5F7F5300CFC420 /* Debug */,
+				8BD30FFF2F5F7F5300CFC420 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8BD30FCC2F5F7F5200CFC420 /* Project object */;
+}

@@ -1,0 +1,131 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (494.60.2)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["InjectionZones", "leftTrap", "rightTrap", "leftFrontDelt", "male"]
+    def "male" (
+        active = true
+        references = @male.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "node_0_001"
+        {
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Xform "InjectionZones" (
+        active = true
+    )
+    {
+    }
+
+    def Capsule "leftTrap" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0, 1.0704405)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/leftTrap/DefaultMaterial>
+        double radius = 0.04
+        quatf xformOp:orient = (0.8601563, 0, 0, 0.5100305)
+        float3 xformOp:translate = (0.06363505, 0.9537908, -0.0380804)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftTrap/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def Capsule "rightTrap" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-5.159355e-8, -5.462262e-10, 2.135029)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/rightTrap/DefaultMaterial>
+        double radius = 0.04
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.48230302, -1.2202614e-8, -2.2729813e-8, 0.87600446)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.073799126, 0.9518313, -0.029985268)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightTrap/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+
+    def Capsule "leftFrontDelt" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.21777807, 0.06607654, 0.6001189)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/leftFrontDelt/DefaultMaterial>
+        double radius = 0.025
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.94808173, -0.11346741, -0.000734549, 0.29709542)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0.11768418, 0.93396837, 0.0032595396)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftFrontDelt/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+    }
+}
+

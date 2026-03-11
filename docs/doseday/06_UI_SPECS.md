@@ -47,13 +47,12 @@
 
 ## Protocols
 - List protocols
-- Detail page shows drugs with:
-  - name
-  - route
-  - half-life
-  - schedule summary string (human readable)
-  - color swatch
-- Add/edit flows are sheet-based wizard
+- Detail page shows drugs with name, route, half-life, schedule summary, color swatch
+- Add sheet has two tabs:
+  - **Single Compound** (default): inline drug form, auto-creates a protocol named after the drug
+  - **Protocol**: protocol info + drug list on one page; no review step; saves immediately
+- No multi-step wizard; no review page
+- Protocols saved to storage as soon as user taps Save; editable later via detail view
 
 ## Injection site UX
 - In DoseEventDetailSheet, if route == injection:

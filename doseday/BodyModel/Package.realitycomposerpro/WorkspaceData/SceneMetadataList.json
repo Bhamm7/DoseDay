@@ -1,0 +1,34 @@
+{
+  "47AD5067-5FEB-472A-835F-677757CAEDA8" : {
+    "objectMetadataList" : [
+      [
+        "47AD5067-5FEB-472A-835F-677757CAEDA8",
+        "Root",
+        "Transform"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "47AD5067-5FEB-472A-835F-677757CAEDA8",
+        "Root",
+        "InjectionZones"
+      ],
+      {
+        "disallowsFraming" : false,
+        "isExpanded" : false,
+        "isLocked" : false
+      },
+      [
+        "47AD5067-5FEB-472A-835F-677757CAEDA8",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  }
+}
