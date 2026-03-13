@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import simd
 
 @Model
 final class DoseEvent {
@@ -8,6 +9,9 @@ final class DoseEvent {
     var statusRawValue: String
     var takenAt: Date?
     var injectionSite: String?
+    var injectionPositionX: Float?
+    var injectionPositionY: Float?
+    var injectionPositionZ: Float?
     var notes: String?
     var createdAt: Date
     var updatedAt: Date

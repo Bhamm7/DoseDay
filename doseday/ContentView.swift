@@ -25,7 +25,7 @@ struct ContentView: View {
                 GraphHubView()
             }
             .tabItem {
-                Label("Graphs", systemImage: "chart.line.uptrend.xyaxis")
+                Label("Stats", systemImage: "chart.xyaxis.line")
             }
 
             NavigationStack {

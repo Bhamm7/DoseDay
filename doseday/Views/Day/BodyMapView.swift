@@ -1,206 +1,49 @@
 import SwiftUI
+import RealityKit
+import BodyModel
 
-// MARK: - Zone definition
-
-private struct BodyZone {
-    let site: InjectionSite
-    let isFront: Bool
-    /// Normalized rect (0–1) within the body canvas
-    let rect: CGRect
-}
-
-private let bodyZones: [BodyZone] = [
-    BodyZone(site: .abdomenLeft,  isFront: true,  rect: CGRect(x: 0.30, y: 0.38, width: 0.18, height: 0.12)),
-    BodyZone(site: .abdomenRight, isFront: true,  rect: CGRect(x: 0.52, y: 0.38, width: 0.18, height: 0.12)),
-    BodyZone(site: .thighLeft,    isFront: true,  rect: CGRect(x: 0.28, y: 0.58, width: 0.16, height: 0.14)),
-    BodyZone(site: .thighRight,   isFront: true,  rect: CGRect(x: 0.54, y: 0.58, width: 0.16, height: 0.14)),
-    BodyZone(site: .upperArmLeft, isFront: true,  rect: CGRect(x: 0.16, y: 0.24, width: 0.12, height: 0.12)),
-    BodyZone(site: .upperArmRight,isFront: true,  rect: CGRect(x: 0.70, y: 0.24, width: 0.12, height: 0.12)),
-    BodyZone(site: .buttockLeft,  isFront: false, rect: CGRect(x: 0.28, y: 0.42, width: 0.18, height: 0.14)),
-    BodyZone(site: .buttockRight, isFront: false, rect: CGRect(x: 0.52, y: 0.42, width: 0.18, height: 0.14)),
-]
-
-// MARK: - Heat color
-
-private func heatColor(daysSinceLastInjection days: Int?) -> Color {
-    guard let days else { return Color.secondary.opacity(0.15) }
-    switch days {
-    case 0...3:   return .red
-    case 4...14:  return .orange
-    case 15...30: return .yellow
-    case 31...90: return .green
-    default:      return Color.secondary.opacity(0.4)
-    }
-}
-
-// MARK: - Body silhouette Canvas
-
-private struct BodySilhouette: View {
-    var body: some View {
-        Canvas { ctx, size in
-            let w = size.width
-            let h = size.height
-
-            // Head
-            let headR = w * 0.12
-            let headCX = w * 0.5
-            let headCY = h * 0.08
-            ctx.fill(
-                Path(ellipseIn: CGRect(x: headCX - headR, y: headCY - headR,
-                                       width: headR * 2, height: headR * 2)),
-                with: .color(.secondary.opacity(0.15))
-            )
-            var headStroke = Path(ellipseIn: CGRect(x: headCX - headR, y: headCY - headR,
-                                                    width: headR * 2, height: headR * 2))
-            ctx.stroke(headStroke, with: .color(.secondary.opacity(0.5)), lineWidth: 1.5)
-
-            // Torso
-            let torsoX = w * 0.28
-            let torsoY = h * 0.17
-            let torsoW = w * 0.44
-            let torsoH = h * 0.36
-            var torso = Path(roundedRect: CGRect(x: torsoX, y: torsoY, width: torsoW, height: torsoH),
-                             cornerRadius: 8)
-            ctx.fill(torso, with: .color(.secondary.opacity(0.1)))
-            ctx.stroke(torso, with: .color(.secondary.opacity(0.5)), lineWidth: 1.5)
-
-            // Arms
-            let armW = w * 0.10
-            let armH = h * 0.32
-            let leftArmX = torsoX - armW + 2
-            let rightArmX = torsoX + torsoW - 2
-            let armY = torsoY + h * 0.01
-            for armX in [leftArmX, rightArmX] {
-                var arm = Path(roundedRect: CGRect(x: armX, y: armY, width: armW, height: armH),
-                               cornerRadius: 6)
-                ctx.fill(arm, with: .color(.secondary.opacity(0.1)))
-                ctx.stroke(arm, with: .color(.secondary.opacity(0.5)), lineWidth: 1.5)
-            }
-
-            // Legs
-            let legW = w * 0.18
-            let legH = h * 0.34
-            let legY = torsoY + torsoH - 4
-            let leftLegX = w * 0.28
-            let rightLegX = w * 0.54
-            for legX in [leftLegX, rightLegX] {
-                var leg = Path(roundedRect: CGRect(x: legX, y: legY, width: legW, height: legH),
-                               cornerRadius: 6)
-                ctx.fill(leg, with: .color(.secondary.opacity(0.1)))
-                ctx.stroke(leg, with: .color(.secondary.opacity(0.5)), lineWidth: 1.5)
-            }
-        }
-    }
-}
-
-// MARK: - BodyMapView
+// MARK: - BodyMapView (SwiftUI shell)
 
 struct BodyMapView: View {
-    // Picker mode: provide a binding
     var selectedSite: Binding<InjectionSite?>?
-    // History mode: provide events
     var historyEvents: [DoseEvent] = []
     var isPickerMode: Bool
 
-    @State private var showingBack = false
-
-    private var visibleZones: [BodyZone] {
-        bodyZones.filter { $0.isFront != showingBack }
-    }
-
-    /// Most recent injection date per site (for history heat map)
-    private func daysSinceLast(for site: InjectionSite) -> Int? {
-        let now = Date()
-        let matching = historyEvents.compactMap { event -> Date? in
-            guard event.resolvedInjectionSite == site,
-                  event.status == .taken,
-                  let takenAt = event.takenAt else { return nil }
-            return takenAt
-        }
-        guard let latest = matching.max() else { return nil }
-        return Calendar.current.dateComponents([.day], from: latest, to: now).day
-    }
-
-    /// Count of injections per site (for history mode dot sizing)
-    private func count(for site: InjectionSite) -> Int {
-        historyEvents.filter { $0.resolvedInjectionSite == site && $0.status == .taken }.count
-    }
-
     var body: some View {
         VStack(spacing: 12) {
-            // Front / Back toggle
-            Picker("View", selection: $showingBack) {
-                Text("Front").tag(false)
-                Text("Back").tag(true)
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
+            BodyARViewRepresentable(
+                selectedSite: selectedSite,
+                historyEvents: historyEvents,
+                isPickerMode: isPickerMode
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .layoutPriority(1)
 
-            // Body diagram with tappable zones
-            GeometryReader { geo in
-                let size = geo.size
-                ZStack {
-                    BodySilhouette()
-
-                    ForEach(visibleZones, id: \.site.rawValue) { zone in
-                        let rect = denormalized(zone.rect, in: size)
-                        zoneView(zone: zone, rect: rect)
-                    }
-                }
+            if isPickerMode, let site = selectedSite?.wrappedValue {
+                Text(site.displayName)
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.primary)
             }
-            .aspectRatio(0.55, contentMode: .fit)
-            .padding(.horizontal)
 
             if !isPickerMode {
                 heatLegend
             }
-        }
-    }
 
-    @ViewBuilder
-    private func zoneView(zone: BodyZone, rect: CGRect) -> some View {
-        let isSelected = selectedSite?.wrappedValue == zone.site
-        let days = isPickerMode ? nil : daysSinceLast(for: zone.site)
-        let color: Color = isPickerMode
-            ? (isSelected ? .blue : Color.secondary.opacity(0.25))
-            : heatColor(daysSinceLastInjection: days)
-        let hasHistory = !isPickerMode && daysSinceLast(for: zone.site) != nil
-
-        Button {
-            if isPickerMode {
-                selectedSite?.wrappedValue = zone.site
-            }
-        } label: {
-            RoundedRectangle(cornerRadius: 6)
-                .fill(color.opacity(isPickerMode ? 0.4 : (hasHistory ? 0.55 : 0.15)))
-                .overlay {
-                    if isPickerMode && isSelected {
-                        RoundedRectangle(cornerRadius: 6)
-                            .strokeBorder(.blue, lineWidth: 2)
-                    }
-                    if !isPickerMode && hasHistory {
-                        Text("\(count(for: zone.site))")
-                            .font(.caption2.weight(.bold))
-                            .foregroundStyle(.white)
-                    }
-                }
+            Text("2-finger drag to rotate · pinch to zoom")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
         }
-        .buttonStyle(.plain)
-        .frame(width: rect.width, height: rect.height)
-        .position(x: rect.midX, y: rect.midY)
-        .accessibilityLabel(zone.site.displayName)
-        .accessibilityAddTraits(isPickerMode && isSelected ? .isSelected : [])
-        .disabled(!isPickerMode)
     }
 
     private var heatLegend: some View {
         HStack(spacing: 12) {
             ForEach([
-                ("0–3d", Color.red),
-                ("4–14d", Color.orange),
+                ("0–3d",   Color.red),
+                ("4–14d",  Color.orange),
                 ("15–30d", Color.yellow),
                 ("31–90d", Color.green),
-                ("90d+", Color.secondary),
+                ("90d+",   Color.secondary),
             ], id: \.0) { label, color in
                 HStack(spacing: 4) {
                     Circle().fill(color).frame(width: 8, height: 8)
@@ -210,13 +53,211 @@ struct BodyMapView: View {
         }
         .padding(.horizontal)
     }
+}
 
-    private func denormalized(_ norm: CGRect, in size: CGSize) -> CGRect {
-        CGRect(
-            x: norm.minX * size.width,
-            y: norm.minY * size.height,
-            width: norm.width * size.width,
-            height: norm.height * size.height
-        )
+// MARK: - UIViewRepresentable
+
+struct BodyARViewRepresentable: UIViewRepresentable {
+    var selectedSite: Binding<InjectionSite?>?
+    var historyEvents: [DoseEvent]
+    var isPickerMode: Bool
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> ARView {
+        let arView = ARView(frame: .zero, cameraMode: .nonAR, automaticallyConfigureSession: false)
+        arView.environment.background = .color(.systemBackground)
+
+        let tap = UITapGestureRecognizer(target: context.coordinator,
+                                         action: #selector(Coordinator.handleTap(_:)))
+        tap.numberOfTouchesRequired = 1
+
+        let rotate = UIPanGestureRecognizer(target: context.coordinator,
+                                            action: #selector(Coordinator.handleRotation(_:)))
+        rotate.minimumNumberOfTouches = 2
+        rotate.maximumNumberOfTouches = 2
+
+        let pinch = UIPinchGestureRecognizer(target: context.coordinator,
+                                             action: #selector(Coordinator.handlePinch(_:)))
+
+        // Tap should not conflict with two-finger gestures
+        rotate.require(toFail: tap)
+        arView.addGestureRecognizer(tap)
+        arView.addGestureRecognizer(rotate)
+        arView.addGestureRecognizer(pinch)
+
+        context.coordinator.arView       = arView
+        context.coordinator.selectedSite = selectedSite
+        context.coordinator.isPickerMode = isPickerMode
+        context.coordinator.historyEvents = historyEvents
+
+        Task { await context.coordinator.loadScene() }
+        return arView
+    }
+
+    func updateUIView(_ uiView: ARView, context: Context) {
+        context.coordinator.selectedSite  = selectedSite
+        context.coordinator.isPickerMode  = isPickerMode
+        context.coordinator.historyEvents = historyEvents
+    }
+
+    // MARK: - Coordinator
+
+    final class Coordinator: NSObject {
+        weak var arView: ARView?
+        var sceneRoot: Entity?
+        var selectedSite: Binding<InjectionSite?>?
+        var isPickerMode  = false
+        var historyEvents: [DoseEvent] = []
+        var baseRotation: simd_quatf = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1)
+        var baseScale:    Float     = 4.0
+
+        // MARK: Scene loading
+
+        func loadScene() async {
+            guard let arView,
+                  let scene = try? await Entity(named: "Scene", in: bodyModelBundle) else { return }
+
+            scene.position = [0, -2.5, -2.0]
+            scene.scale = [baseScale, baseScale, baseScale]
+
+            applyCyanGlow(to: scene)
+            makeZonesInvisible(in: scene)
+
+            if !isPickerMode {
+                placeHistoryDots(in: scene)
+            }
+
+            let anchor = AnchorEntity(world: .zero)
+            anchor.addChild(scene)
+            await MainActor.run {
+                arView.scene.addAnchor(anchor)
+                sceneRoot = scene
+            }
+        }
+
+        // MARK: Gestures
+
+        @objc func handleRotation(_ g: UIPanGestureRecognizer) {
+            guard let root = sceneRoot else { return }
+            if g.state == .began {
+                baseRotation = root.transform.rotation
+                return
+            }
+            let t = g.translation(in: g.view)
+            let rotY = simd_quatf(angle:  Float(t.x) * 0.005, axis: [0, 1, 0])
+            let rotX = simd_quatf(angle:  Float(t.y) * 0.005, axis: [1, 0, 0])
+            root.transform.rotation = rotY * rotX * baseRotation
+            if g.state == .ended { baseRotation = root.transform.rotation }
+        }
+
+        @objc func handlePinch(_ g: UIPinchGestureRecognizer) {
+            guard let root = sceneRoot else { return }
+            if g.state == .began { baseScale = root.scale.x; return }
+            let s = min(max(baseScale * Float(g.scale), 0.3), 3.0)
+            root.scale = [s, s, s]
+            if g.state == .ended { baseScale = s }
+        }
+
+        @objc func handleTap(_ g: UITapGestureRecognizer) {
+            guard isPickerMode, let arView, let root = sceneRoot else { return }
+            let pt = g.location(in: arView)
+
+            // Raycast from screen point against collision shapes
+            let hits = arView.hitTest(pt, query: .nearest, mask: .all)
+            guard let hit = hits.first,
+                  let site = InjectionSite(rawValue: hit.entity.name) else { return }
+
+            selectedSite?.wrappedValue = site
+
+            // Place dot at exact raycasted surface point
+            root.findEntity(named: "__selDot")?.removeFromParent()
+            let localPos = root.convert(position: hit.position, from: nil)
+            let dot = ModelEntity(
+                mesh: .generateSphere(radius: 0.018),
+                materials: [UnlitMaterial(color: .systemBlue)]
+            )
+            dot.name   = "__selDot"
+            dot.position = localPos
+            root.addChild(dot)
+        }
+
+        // MARK: Materials
+
+        private func applyCyanGlow(to scene: Entity) {
+            scene.findEntity(named: "male")?.forEachDescendant { entity in
+                guard var model = entity.components[ModelComponent.self] else { return }
+                var mat = PhysicallyBasedMaterial()
+                mat.baseColor       = .init(tint: UIColor(red: 0.0, green: 0.85, blue: 1.0, alpha: 1.0))
+                mat.emissiveColor   = PhysicallyBasedMaterial.EmissiveColor(color: .cyan)
+                mat.emissiveIntensity = 0.7
+                mat.roughness       = .init(floatLiteral: 0.5)
+                mat.metallic        = .init(floatLiteral: 0.0)
+                model.materials     = Array(repeating: mat, count: max(1, model.materials.count))
+                entity.components[ModelComponent.self] = model
+            }
+        }
+
+        // Makes zone capsules invisible while keeping collision shapes for raycasting
+        private func makeZonesInvisible(in scene: Entity) {
+            scene.forEachDescendant { entity in
+                // Hide the InjectionZones container itself and any named zone entity
+                let isZoneContainer = entity.name == "InjectionZones"
+                let isZone = InjectionSite(rawValue: entity.name) != nil
+                guard isZoneContainer || isZone else { return }
+
+                if isZone {
+                    // Generate collision from the capsule mesh before stripping visuals
+                    entity.generateCollisionShapes(recursive: true)
+                }
+                // Strip ModelComponent from this entity and every descendant
+                entity.forEachDescendant { e in
+                    e.components.remove(ModelComponent.self)
+                }
+            }
+        }
+
+        // MARK: History dots
+
+        private func placeHistoryDots(in scene: Entity) {
+            for site in InjectionSite.allStandard {
+                guard let zone = scene.findEntity(named: site.rawValue),
+                      let color = heatUIColor(for: site) else { continue }
+                let dot = ModelEntity(
+                    mesh: .generateSphere(radius: 0.022),
+                    materials: [UnlitMaterial(color: color)]
+                )
+                dot.position = zone.position(relativeTo: scene)
+                scene.addChild(dot)
+            }
+        }
+
+        private func heatUIColor(for site: InjectionSite) -> UIColor? {
+            let now = Date()
+            let dates = historyEvents.compactMap { event -> Date? in
+                guard event.resolvedInjectionSite == site,
+                      event.status == .taken,
+                      let takenAt = event.takenAt else { return nil }
+                return takenAt
+            }
+            guard let latest = dates.max() else { return nil }
+            let days = Calendar.current.dateComponents([.day], from: latest, to: now).day ?? 999
+            switch days {
+            case 0...3:   return .systemRed.withAlphaComponent(0.9)
+            case 4...14:  return .systemOrange.withAlphaComponent(0.9)
+            case 15...30: return .systemYellow.withAlphaComponent(0.9)
+            case 31...90: return .systemGreen.withAlphaComponent(0.9)
+            default:      return .systemGray.withAlphaComponent(0.6)
+            }
+        }
+    }
+}
+
+// MARK: - Entity traversal
+
+private extension Entity {
+    func forEachDescendant(_ block: (Entity) -> Void) {
+        block(self)
+        children.forEach { $0.forEachDescendant(block) }
     }
 }

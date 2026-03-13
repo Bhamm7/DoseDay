@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8BD310A02F63755B00CFC420 /* BodyModel in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD3109F2F63755B00CFC420 /* BodyModel */; };
 		AA001A2B3F8E4C5D6B7A8900 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8901 /* Enums.swift */; };
 		AA001A2B3F8E4C5D6B7A8902 /* ScheduleDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8903 /* ScheduleDefinition.swift */; };
 		AA001A2B3F8E4C5D6B7A8904 /* MedicationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA001A2B3F8E4C5D6B7A8905 /* MedicationProtocol.swift */; };
@@ -115,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD310A02F63755B00CFC420 /* BodyModel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +290,7 @@
 			);
 			name = DoseDay;
 			packageProductDependencies = (
+				8BD3109F2F63755B00CFC420 /* BodyModel */,
 			);
 			productName = DoseDay;
 			productReference = 8BD30FD42F5F7F5200CFC420 /* DoseDay.app */;
@@ -365,6 +368,9 @@
 			);
 			mainGroup = 8BD30FCB2F5F7F5200CFC420;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8BD3109E2F63755B00CFC420 /* XCLocalSwiftPackageReference "doseday/BodyModel" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8BD30FD52F5F7F5200CFC420 /* Products */;
 			projectDirPath = "";
@@ -787,6 +793,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8BD3109E2F63755B00CFC420 /* XCLocalSwiftPackageReference "doseday/BodyModel" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = doseday/BodyModel;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8BD3109F2F63755B00CFC420 /* BodyModel */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BodyModel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8BD30FCC2F5F7F5200CFC420 /* Project object */;
 }

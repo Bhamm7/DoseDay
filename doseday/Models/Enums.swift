@@ -41,40 +41,103 @@ enum GlucoseUnit: String, CaseIterable, Codable {
 }
 
 enum InjectionSite: Equatable {
-    case abdomenLeft
-    case abdomenRight
-    case thighLeft
-    case thighRight
-    case upperArmLeft
-    case upperArmRight
-    case buttockLeft
-    case buttockRight
+    // Traps
+    case leftTrap, rightTrap
+    // Delts
+    case leftFrontDelt, rightFrontDelt
+    case leftDelt, rightDelt
+    case leftRearDelt, rightRearDelt
+    // Arms
+    case leftBicep, rightBicep
+    case leftTricep, rightTricep
+    // Chest
+    case leftPec, rightPec
+    // Abdomen
+    case leftUpperAbdomen, rightUpperAbdomen
+    case leftLowerAbdomen, rightLowerAbdomen
+    case leftLoveHandle, rightLoveHandle
+    // Glutes
+    case leftVentroGlute, rightVentroGlute
+    case leftDorsoGlute, rightDorsoGlute
+    // Legs
+    case leftQuad, rightQuad
+    case leftCalf, rightCalf
+    // Custom
     case custom(String)
 
     var rawValue: String {
         switch self {
-        case .abdomenLeft: return "abdomenLeft"
-        case .abdomenRight: return "abdomenRight"
-        case .thighLeft: return "thighLeft"
-        case .thighRight: return "thighRight"
-        case .upperArmLeft: return "upperArmLeft"
-        case .upperArmRight: return "upperArmRight"
-        case .buttockLeft: return "buttockLeft"
-        case .buttockRight: return "buttockRight"
-        case .custom(let text): return "custom:\(text)"
+        case .leftTrap: return "leftTrap"
+        case .rightTrap: return "rightTrap"
+        case .leftFrontDelt: return "leftFrontDelt"
+        case .rightFrontDelt: return "rightFrontDelt"
+        case .leftDelt: return "leftDelt"
+        case .rightDelt: return "rightDelt"
+        case .leftRearDelt: return "leftRearDelt"
+        case .rightRearDelt: return "rightRearDelt"
+        case .leftBicep: return "leftBicep"
+        case .rightBicep: return "rightBicep"
+        case .leftTricep: return "leftTricep"
+        case .rightTricep: return "rightTricep"
+        case .leftPec: return "leftPec"
+        case .rightPec: return "rightPec"
+        case .leftUpperAbdomen: return "leftUpperAbdomen"
+        case .rightUpperAbdomen: return "rightUpperAbdomen"
+        case .leftLowerAbdomen: return "leftLowerAbdomen"
+        case .rightLowerAbdomen: return "rightLowerAbdomen"
+        case .leftLoveHandle: return "leftLoveHandle"
+        case .rightLoveHandle: return "rightLoveHandle"
+        case .leftVentroGlute: return "leftVentroGlute"
+        case .rightVentroGlute: return "rightVentroGlute"
+        case .leftDorsoGlute: return "leftDorsoGlute"
+        case .rightDorsoGlute: return "rightDorsoGlute"
+        case .leftQuad: return "leftQuad"
+        case .rightQuad: return "rightQuad"
+        case .leftCalf: return "leftCalf"
+        case .rightCalf: return "rightCalf"
+        case .custom(let t): return "custom:\(t)"
         }
     }
 
     init?(rawValue: String) {
         switch rawValue {
-        case "abdomenLeft": self = .abdomenLeft
-        case "abdomenRight": self = .abdomenRight
-        case "thighLeft": self = .thighLeft
-        case "thighRight": self = .thighRight
-        case "upperArmLeft": self = .upperArmLeft
-        case "upperArmRight": self = .upperArmRight
-        case "buttockLeft": self = .buttockLeft
-        case "buttockRight": self = .buttockRight
+        case "leftTrap": self = .leftTrap
+        case "rightTrap": self = .rightTrap
+        case "leftFrontDelt": self = .leftFrontDelt
+        case "rightFrontDelt": self = .rightFrontDelt
+        case "leftDelt": self = .leftDelt
+        case "rightDelt": self = .rightDelt
+        case "leftRearDelt": self = .leftRearDelt
+        case "rightRearDelt": self = .rightRearDelt
+        case "leftBicep": self = .leftBicep
+        case "rightBicep": self = .rightBicep
+        case "leftTricep": self = .leftTricep
+        case "rightTricep": self = .rightTricep
+        case "leftPec": self = .leftPec
+        case "rightPec": self = .rightPec
+        case "leftUpperAbdomen": self = .leftUpperAbdomen
+        case "rightUpperAbdomen": self = .rightUpperAbdomen
+        case "leftLowerAbdomen": self = .leftLowerAbdomen
+        case "rightLowerAbdomen": self = .rightLowerAbdomen
+        case "leftLoveHandle": self = .leftLoveHandle
+        case "rightLoveHandle": self = .rightLoveHandle
+        case "leftVentroGlute": self = .leftVentroGlute
+        case "rightVentroGlute": self = .rightVentroGlute
+        case "leftDorsoGlute": self = .leftDorsoGlute
+        case "rightDorsoGlute": self = .rightDorsoGlute
+        case "leftQuad": self = .leftQuad
+        case "rightQuad": self = .rightQuad
+        case "leftCalf": self = .leftCalf
+        case "rightCalf": self = .rightCalf
+        // Legacy mappings for data stored before 3D body map
+        case "abdomenLeft": self = .leftLowerAbdomen
+        case "abdomenRight": self = .rightLowerAbdomen
+        case "thighLeft": self = .leftQuad
+        case "thighRight": self = .rightQuad
+        case "upperArmLeft": self = .leftDelt
+        case "upperArmRight": self = .rightDelt
+        case "buttockLeft": self = .leftDorsoGlute
+        case "buttockRight": self = .rightDorsoGlute
         default:
             if rawValue.hasPrefix("custom:") {
                 self = .custom(String(rawValue.dropFirst("custom:".count)))
@@ -86,32 +149,72 @@ enum InjectionSite: Equatable {
 
     var displayName: String {
         switch self {
-        case .abdomenLeft: return "Abdomen Left"
-        case .abdomenRight: return "Abdomen Right"
-        case .thighLeft: return "Thigh Left"
-        case .thighRight: return "Thigh Right"
-        case .upperArmLeft: return "Upper Arm Left"
-        case .upperArmRight: return "Upper Arm Right"
-        case .buttockLeft: return "Buttock Left"
-        case .buttockRight: return "Buttock Right"
-        case .custom(let text): return text
+        case .leftTrap: return "Left Trap"
+        case .rightTrap: return "Right Trap"
+        case .leftFrontDelt: return "Left Front Delt"
+        case .rightFrontDelt: return "Right Front Delt"
+        case .leftDelt: return "Left Delt"
+        case .rightDelt: return "Right Delt"
+        case .leftRearDelt: return "Left Rear Delt"
+        case .rightRearDelt: return "Right Rear Delt"
+        case .leftBicep: return "Left Bicep"
+        case .rightBicep: return "Right Bicep"
+        case .leftTricep: return "Left Tricep"
+        case .rightTricep: return "Right Tricep"
+        case .leftPec: return "Left Pec"
+        case .rightPec: return "Right Pec"
+        case .leftUpperAbdomen: return "Left Upper Abdomen"
+        case .rightUpperAbdomen: return "Right Upper Abdomen"
+        case .leftLowerAbdomen: return "Left Lower Abdomen"
+        case .rightLowerAbdomen: return "Right Lower Abdomen"
+        case .leftLoveHandle: return "Left Love Handle"
+        case .rightLoveHandle: return "Right Love Handle"
+        case .leftVentroGlute: return "Left Ventroglute"
+        case .rightVentroGlute: return "Right Ventroglute"
+        case .leftDorsoGlute: return "Left Dorsoglute"
+        case .rightDorsoGlute: return "Right Dorsoglute"
+        case .leftQuad: return "Left Quad"
+        case .rightQuad: return "Right Quad"
+        case .leftCalf: return "Left Calf"
+        case .rightCalf: return "Right Calf"
+        case .custom(let t): return t
         }
     }
 
     var bodyRegion: String {
         switch self {
-        case .abdomenLeft, .abdomenRight: return "Abdomen"
-        case .thighLeft, .thighRight: return "Thigh"
-        case .upperArmLeft, .upperArmRight: return "Upper Arm"
-        case .buttockLeft, .buttockRight: return "Buttock"
+        case .leftTrap, .rightTrap: return "Traps"
+        case .leftFrontDelt, .rightFrontDelt,
+             .leftDelt, .rightDelt,
+             .leftRearDelt, .rightRearDelt: return "Delts"
+        case .leftBicep, .rightBicep,
+             .leftTricep, .rightTricep: return "Arms"
+        case .leftPec, .rightPec: return "Chest"
+        case .leftUpperAbdomen, .rightUpperAbdomen,
+             .leftLowerAbdomen, .rightLowerAbdomen,
+             .leftLoveHandle, .rightLoveHandle: return "Abdomen"
+        case .leftVentroGlute, .rightVentroGlute,
+             .leftDorsoGlute, .rightDorsoGlute: return "Glutes"
+        case .leftQuad, .rightQuad: return "Quads"
+        case .leftCalf, .rightCalf: return "Calves"
         case .custom: return "Custom"
         }
     }
 
     static let allStandard: [InjectionSite] = [
-        .abdomenLeft, .abdomenRight,
-        .thighLeft, .thighRight,
-        .upperArmLeft, .upperArmRight,
-        .buttockLeft, .buttockRight
+        .leftTrap, .rightTrap,
+        .leftFrontDelt, .rightFrontDelt,
+        .leftDelt, .rightDelt,
+        .leftRearDelt, .rightRearDelt,
+        .leftBicep, .rightBicep,
+        .leftTricep, .rightTricep,
+        .leftPec, .rightPec,
+        .leftUpperAbdomen, .rightUpperAbdomen,
+        .leftLowerAbdomen, .rightLowerAbdomen,
+        .leftLoveHandle, .rightLoveHandle,
+        .leftVentroGlute, .rightVentroGlute,
+        .leftDorsoGlute, .rightDorsoGlute,
+        .leftQuad, .rightQuad,
+        .leftCalf, .rightCalf
     ]
 }

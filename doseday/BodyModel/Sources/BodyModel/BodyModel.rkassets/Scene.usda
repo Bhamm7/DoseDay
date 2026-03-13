@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["InjectionZones", "leftTrap", "rightTrap", "leftFrontDelt", "male"]
+    reorder nameChildren = ["InjectionZones", "leftTrap", "rightTrap", "leftFrontDelt", "rightFrontDelt", "leftDelt", "rightDelt", "leftRearDelt", "rightRearDelt", "rightTricep", "leftTricep", "rightBicep", "leftUpperAbdomen", "rightUpperAbdomen", "rightLowerAbdomen", "leftLowerAbdomen", "leftLoveHandle", "rightLoveHandle", "rightVentroGlute", "leftVentroGlute", "leftDorsoGlute", "rightDorsoGlute", "leftQuad", "rightQuad", "leftCalf", "rightCalf", "leftBicep", "rightPec", "leftPec", "male"]
     def "male" (
         active = true
         references = @male.usdz@
@@ -60,6 +60,31 @@ def Xform "Root"
                 token outputs:surface
             }
         }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.08, 0.11, 0.08)
+                float height = 0.11
+                float radius = 0.04
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
     }
 
     def Capsule "rightTrap" (
@@ -93,6 +118,31 @@ def Xform "Root"
                 token outputs:surface
             }
         }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.08, 0.11, 0.08)
+                float height = 0.11
+                float radius = 0.04
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
     }
 
     def Capsule "leftFrontDelt" (
@@ -124,6 +174,1508 @@ def Xform "Root"
                 color3f inputs:diffuseColor = (1, 1, 1)
                 float inputs:roughness = 0.75
                 token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.05, 0.08, 0.050000004)
+                float height = 0.08
+                float radius = 0.025000002
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -9.313226e-10)
+                }
+            }
+        }
+    }
+
+    def Capsule "rightFrontDelt" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.228083, -0.17003927, -0.3306843)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/rightFrontDelt/DefaultMaterial>
+        double radius = 0.025
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.97482497, -0.12572286, -0.06455332, -0.17246139)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.120209716, 0.9250823, 0.0055006295)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightFrontDelt/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.05, 0.08, 0.050000004)
+                float height = 0.08
+                float radius = 0.025000002
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -9.313226e-10)
+                }
+            }
+        }
+    }
+
+    def Capsule "leftDelt" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.22114049, 0.053551763, 0.543882)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/leftDelt/DefaultMaterial>
+        double radius = 0.035
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.9562324, -0.11339922, -0.003996907, 0.26971135)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0.13437046, 0.92444086, -0.02437933)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftDelt/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.07, 0.09, 0.07)
+                float height = 0.09
+                float radius = 0.035
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightDelt" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.15403207, 0.16799432, 2.629319)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/rightDelt/DefaultMaterial>
+        double radius = 0.035
+        float2 ui:nodegraph:node:pos = (60, 60)
+        int ui:nodegraph:node:stackingOrder = 3
+        quatf xformOp:orient = (0.25794828, -0.061497085, 0.09535967, 0.9594724)
+        float3 xformOp:scale = (1, 0.9999999, 0.9999999)
+        float3 xformOp:translate = (-0.1367583, 0.91651225, -0.018952701)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightDelt/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.07, 0.09, 0.07)
+                float height = 0.09
+                float radius = 0.035
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "leftRearDelt" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.36543003, 0.11290692, 0.80254054)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/leftRearDelt/DefaultMaterial>
+        double radius = 0.02
+        float2 ui:nodegraph:node:pos = (60, 60)
+        int ui:nodegraph:node:stackingOrder = 3
+        quatf xformOp:orient = (0.89979535, -0.18867183, -0.019779915, 0.3929122)
+        float3 xformOp:scale = (1, 0.9999999, 0.9999999)
+        float3 xformOp:translate = (0.13161346, 0.9148, -0.057444178)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftRearDelt/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.04, 0.06, 0.04)
+                float height = 0.06
+                float radius = 0.02
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightRearDelt" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.15632807, -0.39452127, -0.91711074)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/rightRearDelt/DefaultMaterial>
+        double radius = 0.02
+        float2 ui:nodegraph:node:pos = (80, 80)
+        int ui:nodegraph:node:stackingOrder = 4
+        quatf xformOp:orient = (0.8698447, -0.15514794, -0.14130673, -0.4464659)
+        float3 xformOp:scale = (1, 0.99999994, 0.9999999)
+        float3 xformOp:translate = (-0.13811871, 0.9202092, -0.04983404)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightRearDelt/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.04, 0.06, 0.04)
+                float height = 0.06
+                float radius = 0.02
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightTricep" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.052187413, -0.23825006, -0.47643888)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.05
+        rel material:binding = </Root/rightTricep/DefaultMaterial>
+        double radius = 0.035
+        float2 ui:nodegraph:node:pos = (100, 100)
+        int ui:nodegraph:node:stackingOrder = 5
+        quatf xformOp:orient = (0.96381265, -0.053208522, -0.109334916, -0.23723376)
+        float3 xformOp:scale = (0.9999998, 0.99999976, 0.9999996)
+        float3 xformOp:translate = (-0.16040029, 0.8307966, -0.03804001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightTricep/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.07, 0.120000005, 0.07000001)
+                float height = 0.120000005
+                float radius = 0.035000004
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -1.8626451e-9)
+                }
+            }
+        }
+    }
+
+    def Capsule "leftTricep" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.16851926, -0.036820512, 0.5059081)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.05
+        rel material:binding = </Root/leftTricep/DefaultMaterial>
+        double radius = 0.035
+        float2 ui:nodegraph:node:pos = (120, 120)
+        int ui:nodegraph:node:stackingOrder = 6
+        quatf xformOp:orient = (0.9649668, -0.07687712, -0.03881888, 0.24783492)
+        float3 xformOp:scale = (0.99999976, 0.99999976, 0.9999996)
+        float3 xformOp:translate = (0.16830648, 0.8221324, -0.041839212)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftTricep/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.07, 0.120000005, 0.07000001)
+                float height = 0.120000005
+                float radius = 0.035000004
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -1.8626451e-9)
+                }
+            }
+        }
+    }
+
+    def Capsule "leftBicep" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.025547288, -0.03682052, 0.5059078)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.05
+        rel material:binding = </Root/leftBicep/DefaultMaterial>
+        double radius = 0.025
+        float2 ui:nodegraph:node:pos = (140, 140)
+        int ui:nodegraph:node:stackingOrder = 7
+        quatf xformOp:orient = (0.9678755, 0.016971527, -0.01462577, 0.25042975)
+        float3 xformOp:scale = (0.99999964, 0.99999964, 0.9999994)
+        float3 xformOp:translate = (0.16770373, 0.8205124, -0.006151717)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftBicep/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.05, 0.1, 0.050000004)
+                float height = 0.1
+                float radius = 0.025000002
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -9.313226e-10)
+                }
+            }
+        }
+    }
+
+    def Capsule "leftPec" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.30539954, 0.11639627, 0.008041246)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/leftPec/DefaultMaterial>
+        double radius = 0.06
+        float2 ui:nodegraph:node:pos = (200, 200)
+        int ui:nodegraph:node:stackingOrder = 10
+        quatf xformOp:orient = (0.9866472, -0.15207943, 0.056877483, 0.012814378)
+        float3 xformOp:scale = (0.9999996, 0.99999946, 0.9999992)
+        float3 xformOp:translate = (0.042954866, 0.88922054, 0.020487476)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftPec/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.12, 0.14, 0.12)
+                float height = 0.14
+                float radius = 0.06
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightPec" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.5900899, 0.11639632, 0.008041239)
+        }
+    )
+    {
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/rightPec/DefaultMaterial>
+        double radius = 0.06
+        float2 ui:nodegraph:node:pos = (180, 180)
+        int ui:nodegraph:node:stackingOrder = 9
+        quatf xformOp:orient = (0.95509344, -0.29051208, 0.054484375, 0.020753775)
+        float3 xformOp:scale = (0.9999996, 0.9999996, 0.9999992)
+        float3 xformOp:translate = (-0.04640635, 0.88818866, 0.019381663)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightPec/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.12, 0.14, 0.12)
+                float height = 0.14
+                float radius = 0.06
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightBicep" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.0447976, -0.0011386158, -0.4327128)
+        }
+    )
+    {
+        reorder nameChildren = ["rightPec", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.05
+        rel material:binding = </Root/rightBicep/DefaultMaterial>
+        double radius = 0.025
+        float2 ui:nodegraph:node:pos = (160, 160)
+        int ui:nodegraph:node:stackingOrder = 8
+        quatf xformOp:orient = (0.97644365, 0.021752594, -0.00536391, -0.21460629)
+        float3 xformOp:scale = (0.99999946, 0.9999995, 0.9999993)
+        float3 xformOp:translate = (-0.1691543, 0.81868154, -0.006219331)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightBicep/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.05, 0.1, 0.050000004)
+                float height = 0.1
+                float radius = 0.025000002
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -9.313226e-10)
+                }
+            }
+        }
+    }
+
+    def Capsule "leftUpperAbdomen" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.040914755, 0.018283542, -3.1796765)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/leftUpperAbdomen/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (160, 160)
+        int ui:nodegraph:node:stackingOrder = 8
+        quatf xformOp:orient = (-0.018849356, 0.00952756, 0.020277355, -0.99957126)
+        float3 xformOp:scale = (0.9999995, 0.9999997, 0.9999994)
+        float3 xformOp:translate = (0.025341704, 0.7814553, 0.05279239)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftUpperAbdomen/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.120000005, 0.09)
+                float height = 0.120000005
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightUpperAbdomen" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.039880116, 0.020443024, -3.1262534)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/rightUpperAbdomen/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (180, 180)
+        int ui:nodegraph:node:stackingOrder = 9
+        quatf xformOp:orient = (-0.007871463, -0.010066087, -0.020015486, 0.99971795)
+        float3 xformOp:scale = (0.9999993, 0.9999996, 0.9999993)
+        float3 xformOp:translate = (-0.04145039, 0.78392977, 0.04966433)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightUpperAbdomen/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.120000005, 0.09)
+                float height = 0.120000005
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightLowerAbdomen" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.113821544, -0.16904354, 0.037706032)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/rightLowerAbdomen/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (200, 200)
+        int ui:nodegraph:node:stackingOrder = 10
+        quatf xformOp:orient = (0.99473065, -0.055078007, -0.085337974, 0.013953162)
+        float3 xformOp:scale = (0.9999993, 0.99999946, 0.9999993)
+        float3 xformOp:translate = (-0.035069726, 0.6913863, 0.04892203)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightLowerAbdomen/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.11, 0.09)
+                float height = 0.11
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "leftLowerAbdomen" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.092521526, -0.47866657, -3.2147574)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/leftLowerAbdomen/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (220, 220)
+        int ui:nodegraph:node:stackingOrder = 11
+        quatf xformOp:orient = (-0.024538765, -0.23828608, -0.036235202, -0.9702085)
+        float3 xformOp:scale = (0.9999994, 0.9999996, 0.99999946)
+        float3 xformOp:translate = (0.018748948, 0.6925874, 0.056048978)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftLowerAbdomen/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.11, 0.09)
+                float height = 0.11
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "leftLoveHandle" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.092521526, -0.47866657, -3.2147574)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/leftLoveHandle/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (240, 240)
+        int ui:nodegraph:node:stackingOrder = 12
+        quatf xformOp:orient = (0.02453877, 0.2382861, 0.0362352, 0.9702085)
+        float3 xformOp:scale = (0.9999994, 0.9999996, 0.99999946)
+        float3 xformOp:translate = (0.061454717, 0.6882271, 0.018954376)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftLoveHandle/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.11, 0.09)
+                float height = 0.11
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightLoveHandle" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.091363825, 0.45371568, -3.131911)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/rightLoveHandle/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (260, 260)
+        int ui:nodegraph:node:stackingOrder = 13
+        quatf xformOp:orient = (0.005559126, -0.2248951, 0.04340781, 0.97339976)
+        float3 xformOp:scale = (0.9999994, 0.9999996, 0.99999946)
+        float3 xformOp:translate = (-0.06429572, 0.691871, 0.016706645)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightLoveHandle/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.11, 0.09)
+                float height = 0.11
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightVentroGlute" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.091363825, 0.45371568, -3.131911)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/rightVentroGlute/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (280, 280)
+        int ui:nodegraph:node:stackingOrder = 14
+        quatf xformOp:orient = (0.005559126, -0.22489513, 0.0434078, 0.9733997)
+        float3 xformOp:scale = (0.9999992, 0.99999946, 0.99999934)
+        float3 xformOp:translate = (-0.0765897, 0.6081396, 0.011362899)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightVentroGlute/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.11, 0.09)
+                float height = 0.11
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "leftVentroGlute" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0.091363825, 0.45371568, -3.131911)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.02
+        rel material:binding = </Root/leftVentroGlute/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (300, 300)
+        int ui:nodegraph:node:stackingOrder = 15
+        quatf xformOp:orient = (0.0055591227, -0.22489513, 0.04340779, 0.9733997)
+        float3 xformOp:scale = (0.99999905, 0.99999934, 0.9999992)
+        float3 xformOp:translate = (0.07153236, 0.6125898, 0.013165152)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftVentroGlute/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.11, 0.09)
+                float height = 0.11
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "leftDorsoGlute" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.25270438, 0.45371577, -3.131911)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/leftDorsoGlute/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (320, 320)
+        int ui:nodegraph:node:stackingOrder = 16
+        quatf xformOp:orient = (-0.033022016, -0.22252703, -0.12386611, 0.96646184)
+        float3 xformOp:scale = (0.9999989, 0.9999992, 0.9999991)
+        float3 xformOp:translate = (0.043467086, 0.6097533, -0.048576556)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftDorsoGlute/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.120000005, 0.09)
+                float height = 0.120000005
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "rightDorsoGlute" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.33834845, 0.3960692, -3.3389704)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.03
+        rel material:binding = </Root/rightDorsoGlute/DefaultMaterial>
+        double radius = 0.045
+        float2 ui:nodegraph:node:pos = (340, 340)
+        int ui:nodegraph:node:stackingOrder = 17
+        quatf xformOp:orient = (0.06225996, -0.20925532, -0.14516635, 0.9650195)
+        float3 xformOp:scale = (0.9999988, 0.99999905, 0.999999)
+        float3 xformOp:translate = (-0.035945702, 0.6099319, -0.049009636)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightDorsoGlute/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.09, 0.120000005, 0.09)
+                float height = 0.120000005
+                float radius = 0.045
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                }
+            }
+        }
+    }
+
+    def Capsule "leftQuad" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.12839904, 0.45371547, -3.131911)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.09
+        rel material:binding = </Root/leftQuad/DefaultMaterial>
+        double radius = 0.05
+        float2 ui:nodegraph:node:pos = (340, 340)
+        int ui:nodegraph:node:stackingOrder = 17
+        quatf xformOp:orient = (-0.019136494, -0.22414835, -0.06359744, 0.9722895)
+        float3 xformOp:scale = (0.9999988, 0.99999905, 0.999999)
+        float3 xformOp:translate = (0.07630752, 0.4873036, 0.02154983)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftQuad/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.1, 0.19, 0.10000001)
+                float height = 0.19
+                float radius = 0.050000004
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -1.8626451e-9)
+                }
+            }
+        }
+    }
+
+    def Capsule "rightQuad" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.12839904, 0.45371547, -3.131911)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.09
+        rel material:binding = </Root/rightQuad/DefaultMaterial>
+        double radius = 0.05
+        float2 ui:nodegraph:node:pos = (360, 360)
+        int ui:nodegraph:node:stackingOrder = 18
+        quatf xformOp:orient = (-0.019136481, -0.2241483, -0.06359744, 0.97228944)
+        float3 xformOp:scale = (0.99999875, 0.99999905, 0.999999)
+        float3 xformOp:translate = (-0.07676871, 0.47711554, 0.021867022)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightQuad/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.1, 0.19, 0.10000001)
+                float height = 0.19
+                float radius = 0.050000004
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -1.8626451e-9)
+                }
+            }
+        }
+    }
+
+    def Capsule "leftCalf" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.015924, 0.45361313, -3.1399403)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.06
+        rel material:binding = </Root/leftCalf/DefaultMaterial>
+        double radius = 0.04
+        float2 ui:nodegraph:node:pos = (360, 360)
+        int ui:nodegraph:node:stackingOrder = 18
+        quatf xformOp:orient = (-0.0025953685, -0.22485341, -0.007943778, 0.9743568)
+        float3 xformOp:scale = (0.99999875, 0.99999905, 0.999999)
+        float3 xformOp:translate = (0.07694627, 0.22328146, -0.045290135)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/leftCalf/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.08, 0.14, 0.08)
+                float height = 0.14
+                float radius = 0.04
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -1.8626451e-9)
+                }
+            }
+        }
+    }
+
+    def Capsule "rightCalf" (
+        active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (-0.042292025, 0.4520351, -3.2001944)
+        }
+    )
+    {
+        reorder nameChildren = ["rightBicep", "DefaultMaterial"]
+        uniform token axis = "Y"
+        double height = 0.06
+        rel material:binding = </Root/rightCalf/DefaultMaterial>
+        double radius = 0.04
+        float2 ui:nodegraph:node:pos = (380, 380)
+        int ui:nodegraph:node:stackingOrder = 19
+        quatf xformOp:orient = (0.023808789, -0.22455558, -0.014033951, 0.9740693)
+        float3 xformOp:scale = (0.99999875, 0.9999989, 0.999999)
+        float3 xformOp:translate = (-0.07827985, 0.22224039, -0.051300228)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            token outputs:surface.connect = </Root/rightCalf/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "InputTarget"
+        {
+            uniform token info:id = "RealityKit.InputTarget"
+        }
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.08, 0.14, 0.08)
+                float height = 0.14
+                float radius = 0.04
+                token shapeType = "Capsule"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, -1.8626451e-9)
+                }
             }
         }
     }

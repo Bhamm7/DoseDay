@@ -185,6 +185,9 @@ struct CalendarView: View {
 
 private struct CalendarDayRow: View {
     @Bindable var event: DoseEvent
+    @State private var showBodyPicker = false
+    @State private var selectedSite: InjectionSite? = nil
+
     var body: some View {
         HStack(spacing: 12) {
             Circle()
@@ -198,6 +201,20 @@ private struct CalendarDayRow: View {
                     .font(.caption).foregroundStyle(.secondary)
             }
             Spacer()
+            if event.drug?.route == .injection {
+                Button {
+                    selectedSite = event.resolvedInjectionSite
+                    showBodyPicker = true
+                } label: {
+                    Image(systemName: "syringe")
+                        .font(.title3)
+                        .foregroundStyle(event.injectionSite != nil
+                            ? Color(hex: event.drug?.colorHex ?? "#007AFF")
+                            : .secondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Log injection site for \(event.drug?.name ?? "dose")")
+            }
             if event.status == .scheduled {
                 Button {
                     event.status = .taken
@@ -215,5 +232,25 @@ private struct CalendarDayRow: View {
             }
         }
         .padding(.vertical, 8)
+        .sheet(isPresented: $showBodyPicker) {
+            NavigationStack {
+                BodyMapView(selectedSite: $selectedSite, isPickerMode: true)
+                    .navigationTitle("Injection Site")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Save") {
+                                if let site = selectedSite {
+                                    event.injectionSite = site.rawValue
+                                }
+                                showBodyPicker = false
+                            }
+                        }
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") { showBodyPicker = false }
+                        }
+                    }
+            }
+        }
     }
 }
