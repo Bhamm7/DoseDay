@@ -164,22 +164,12 @@ struct CalendarView: View {
     private func syncMonth(for start: Date) {
         let end = Calendar.current.date(byAdding: .month, value: 1, to: start)!
         let interval = DateInterval(start: start, end: end)
-        let service = SchedulingService()
-        let notifications = NotificationService()
-        let drugs = allProtocols.flatMap { $0.drugs }
-        for drug in drugs {
-            let existing = allEvents.filter { $0.drug?.id == drug.id }
-            let (toInsert, toDelete) = service.syncDoseEvents(for: drug, in: interval, existingEvents: existing)
-            for event in toInsert {
-                modelContext.insert(event)
-                event.drug = drug
-                notifications.schedule(for: event)
-            }
-            for event in toDelete {
-                notifications.cancel(for: event)
-                modelContext.delete(event)
-            }
-        }
+        SchedulingService().reconcileDoseEvents(
+            for: allProtocols.flatMap(\.drugs),
+            in: interval,
+            allEvents: allEvents,
+            modelContext: modelContext
+        )
     }
 }
 

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 
 struct SchedulingService {
     private let calendar = Calendar.current
@@ -69,6 +70,32 @@ struct SchedulingService {
         let toDelete = modifiableExisting.filter { !expectedDates.contains($0.scheduledAt) }
 
         return (toInsert, toDelete)
+    }
+
+    func reconcileDoseEvents(
+        for drugs: [Drug],
+        in dateInterval: DateInterval,
+        allEvents: [DoseEvent],
+        modelContext: ModelContext,
+        notificationService: NotificationService = NotificationService()
+    ) {
+        for drug in drugs {
+            let existing = allEvents.filter {
+                $0.drug?.id == drug.id && dateInterval.contains($0.scheduledAt)
+            }
+            let (toInsert, toDelete) = syncDoseEvents(for: drug, in: dateInterval, existingEvents: existing)
+
+            for event in toInsert {
+                modelContext.insert(event)
+                event.drug = drug
+                notificationService.schedule(for: event)
+            }
+
+            for event in toDelete {
+                notificationService.cancel(for: event)
+                modelContext.delete(event)
+            }
+        }
     }
 
     // MARK: - Private

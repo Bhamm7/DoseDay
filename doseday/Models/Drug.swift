@@ -24,6 +24,8 @@ final class Drug {
     var colorHex: String
     var doseUnit: String
     var halfLifeHours: Double
+    var reconstitutionAmount: Double?
+    var reconstitutionDiluentML: Double?
     var scheduleData: Data
     var reminderData: Data
     var createdAt: Date
@@ -54,6 +56,8 @@ final class Drug {
         colorHex: String = drugColorPalette.randomElement()!,
         doseUnit: String = "mg",
         halfLifeHours: Double = 24,
+        reconstitutionAmount: Double? = nil,
+        reconstitutionDiluentML: Double? = nil,
         scheduleData: Data = Data(),
         reminderData: Data = (try? ReminderSettings.default.encoded()) ?? Data(),
         createdAt: Date = Date(),
@@ -65,6 +69,8 @@ final class Drug {
         self.colorHex = colorHex
         self.doseUnit = doseUnit
         self.halfLifeHours = halfLifeHours
+        self.reconstitutionAmount = reconstitutionAmount
+        self.reconstitutionDiluentML = reconstitutionDiluentML
         self.scheduleData = scheduleData
         self.reminderData = reminderData
         self.createdAt = createdAt

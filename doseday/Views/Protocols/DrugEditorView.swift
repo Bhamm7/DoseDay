@@ -13,6 +13,8 @@ struct DrugEditorView: View {
     @State private var colorHex = "#34C759"
     @State private var doseUnit = "mg"
     @State private var halfLifeHours = 24.0
+    @State private var reconstitutionAmountText = ""
+    @State private var reconstitutionDiluentText = ""
 
     @State private var frequencyType: FrequencyType = .daily
     @State private var times: [LocalTime] = [LocalTime(hour: 8, minute: 0)]
@@ -178,6 +180,36 @@ struct DrugEditorView: View {
                     }
                 }
 
+                if route == .injection {
+                    Section("Syringe / Reconstitution") {
+                        HStack {
+                            Text("Compound Amount")
+                            Spacer()
+                            TextField("Optional", text: $reconstitutionAmountText)
+                                .multilineTextAlignment(.trailing)
+                                .keyboardType(.decimalPad)
+                                .frame(width: 110)
+                            Text(doseUnit.isEmpty ? "mg" : doseUnit)
+                                .foregroundStyle(.secondary)
+                        }
+
+                        HStack {
+                            Text("Diluent")
+                            Spacer()
+                            TextField("Optional", text: $reconstitutionDiluentText)
+                                .multilineTextAlignment(.trailing)
+                                .keyboardType(.decimalPad)
+                                .frame(width: 110)
+                            Text("mL")
+                                .foregroundStyle(.secondary)
+                        }
+
+                        Text("Used by the beta syringe view to calculate the U100 draw amount.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
                 Section("Reminder") {
                     Toggle("Enable Reminder", isOn: $reminderEnabled)
                     if reminderEnabled {
@@ -223,6 +255,8 @@ struct DrugEditorView: View {
         colorHex = drug.colorHex
         doseUnit = drug.doseUnit
         halfLifeHours = drug.halfLifeHours
+        reconstitutionAmountText = formattedOptionalDouble(drug.reconstitutionAmount)
+        reconstitutionDiluentText = formattedOptionalDouble(drug.reconstitutionDiluentML)
         if let sched = drug.schedule {
             frequencyType = sched.frequencyType
             times = sched.times
@@ -255,6 +289,8 @@ struct DrugEditorView: View {
             drug.colorHex = colorHex
             drug.doseUnit = doseUnit
             drug.halfLifeHours = halfLifeHours
+            drug.reconstitutionAmount = route == .injection ? Double(reconstitutionAmountText) : nil
+            drug.reconstitutionDiluentML = route == .injection ? Double(reconstitutionDiluentText) : nil
             drug.scheduleData = schedData
             drug.reminderData = remData
             drug.updatedAt = Date()
@@ -265,6 +301,8 @@ struct DrugEditorView: View {
                 colorHex: colorHex,
                 doseUnit: doseUnit,
                 halfLifeHours: halfLifeHours,
+                reconstitutionAmount: route == .injection ? Double(reconstitutionAmountText) : nil,
+                reconstitutionDiluentML: route == .injection ? Double(reconstitutionDiluentText) : nil,
                 scheduleData: schedData,
                 reminderData: remData
             )
@@ -272,6 +310,11 @@ struct DrugEditorView: View {
             drug.protocol = `protocol`
         }
         dismiss()
+    }
+
+    private func formattedOptionalDouble(_ value: Double?) -> String {
+        guard let value else { return "" }
+        return value.formatted(.number.precision(.fractionLength(0...2)))
     }
 }
 

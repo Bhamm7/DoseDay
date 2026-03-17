@@ -41,7 +41,15 @@ struct DoseEventDetailSheet: View {
 
                 if event.drug?.route == .injection {
                     Section("Injection Site") {
-                        BodyMapView(selectedSite: $selectedSite, isPickerMode: true)
+                        BodyMapView(
+                            selectedSite: $selectedSite,
+                            isPickerMode: true,
+                            onSiteTapped: { _, pos in
+                                event.injectionPositionX = pos.x
+                                event.injectionPositionY = pos.y
+                                event.injectionPositionZ = pos.z
+                            }
+                        )
                             .listRowInsets(EdgeInsets())
                             .padding(.vertical, 8)
 
@@ -100,6 +108,11 @@ struct DoseEventDetailSheet: View {
             event.injectionSite = InjectionSite.custom(customSiteText).rawValue
         } else if let site = selectedSite {
             event.injectionSite = site.rawValue
+        }
+        // Tapping a site counts as recording the injection — auto-mark taken
+        if (selectedSite != nil || isCustomSite) && event.status != .taken {
+            event.status = .taken
+            event.takenAt = useCustomTime ? customTime : Date()
         }
         event.notes = noteText.isEmpty ? nil : noteText
         dismiss()

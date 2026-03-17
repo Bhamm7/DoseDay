@@ -28,6 +28,13 @@ final class DoseEvent {
         return InjectionSite(rawValue: raw)
     }
 
+    var injectionPosition: SIMD3<Float>? {
+        guard let x = injectionPositionX,
+              let y = injectionPositionY,
+              let z = injectionPositionZ else { return nil }
+        return SIMD3<Float>(x, y, z)
+    }
+
     init(
         id: UUID = UUID(),
         scheduledAt: Date,

@@ -47,6 +47,14 @@
 		GG001A2B3F8E4C5D6B7A89AC /* UnifiedGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89AD /* UnifiedGraphView.swift */; };
 		GG001A2B3F8E4C5D6B7A89AE /* SymptomTagManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG001A2B3F8E4C5D6B7A89AF /* SymptomTagManagerView.swift */; };
 		HH001A2B3F8E4C5D6B7A89B0 /* CompoundLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = HH001A2B3F8E4C5D6B7A89B1 /* CompoundLibraryService.swift */; };
+		II001A2B3F8E4C5D6B7A89C0 /* LabReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = II001A2B3F8E4C5D6B7A89C1 /* LabReport.swift */; };
+		II001A2B3F8E4C5D6B7A89C2 /* StatsOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = II001A2B3F8E4C5D6B7A89C3 /* StatsOverviewView.swift */; };
+		II001A2B3F8E4C5D6B7A89C4 /* LabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = II001A2B3F8E4C5D6B7A89C5 /* LabsView.swift */; };
+		II001A2B3F8E4C5D6B7A89C6 /* LabResultEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = II001A2B3F8E4C5D6B7A89C7 /* LabResultEditorSheet.swift */; };
+		JJ001A2B3F8E4C5D6B7A89D0 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = JJ001A2B3F8E4C5D6B7A89D1 /* TodayView.swift */; };
+		KK001A2B3F8E4C5D6B7A89E0 /* BetaDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK001A2B3F8E4C5D6B7A89E1 /* BetaDailyView.swift */; };
+		KK001A2B3F8E4C5D6B7A89E2 /* BetaDoseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK001A2B3F8E4C5D6B7A89E3 /* BetaDoseDetailView.swift */; };
+		KK001A2B3F8E4C5D6B7A89E4 /* U100SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK001A2B3F8E4C5D6B7A89E5 /* U100SyringeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +117,14 @@
 		GG001A2B3F8E4C5D6B7A89AD /* UnifiedGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedGraphView.swift; sourceTree = "<group>"; };
 		GG001A2B3F8E4C5D6B7A89AF /* SymptomTagManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomTagManagerView.swift; sourceTree = "<group>"; };
 		HH001A2B3F8E4C5D6B7A89B1 /* CompoundLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundLibraryService.swift; sourceTree = "<group>"; };
+		II001A2B3F8E4C5D6B7A89C1 /* LabReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReport.swift; sourceTree = "<group>"; };
+		II001A2B3F8E4C5D6B7A89C3 /* StatsOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsOverviewView.swift; sourceTree = "<group>"; };
+		II001A2B3F8E4C5D6B7A89C5 /* LabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabsView.swift; sourceTree = "<group>"; };
+		II001A2B3F8E4C5D6B7A89C7 /* LabResultEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabResultEditorSheet.swift; sourceTree = "<group>"; };
+		JJ001A2B3F8E4C5D6B7A89D1 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		KK001A2B3F8E4C5D6B7A89E1 /* BetaDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDailyView.swift; sourceTree = "<group>"; };
+		KK001A2B3F8E4C5D6B7A89E3 /* BetaDoseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDoseDetailView.swift; sourceTree = "<group>"; };
+		KK001A2B3F8E4C5D6B7A89E5 /* U100SyringeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = U100SyringeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +193,7 @@
 				AA001A2B3F8E4C5D6B7A8909 /* DoseEvent.swift */,
 				AA001A2B3F8E4C5D6B7A890B /* DailyVitals.swift */,
 				AA001A2B3F8E4C5D6B7A890D /* DailyNote.swift */,
+				II001A2B3F8E4C5D6B7A89C1 /* LabReport.swift */,
 				GG001A2B3F8E4C5D6B7A89A1 /* LabResult.swift */,
 				GG001A2B3F8E4C5D6B7A89A3 /* SymptomTag.swift */,
 				GG001A2B3F8E4C5D6B7A89A5 /* DailySymptom.swift */,
@@ -201,6 +218,8 @@
 				BB001A2B3F8E4C5D6B7A8931 /* Shared */,
 				BB001A2B3F8E4C5D6B7A8932 /* Calendar */,
 				BB001A2B3F8E4C5D6B7A8933 /* Day */,
+				JJ001A2B3F8E4C5D6B7A89D2 /* Today */,
+				KK001A2B3F8E4C5D6B7A89E6 /* Beta */,
 				CC001A2B3F8E4C5D6B7A8960 /* Protocols */,
 				EE001A2B3F8E4C5D6B7A8980 /* Graphs */,
 				FF001A2B3F8E4C5D6B7A8990 /* Settings */,
@@ -213,6 +232,7 @@
 			children = (
 				BB001A2B3F8E4C5D6B7A8934 /* Color+Hex.swift */,
 				BB001A2B3F8E4C5D6B7A8935 /* StatusPillView.swift */,
+				II001A2B3F8E4C5D6B7A89C7 /* LabResultEditorSheet.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -242,6 +262,24 @@
 			path = Day;
 			sourceTree = "<group>";
 		};
+		JJ001A2B3F8E4C5D6B7A89D2 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				JJ001A2B3F8E4C5D6B7A89D1 /* TodayView.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		KK001A2B3F8E4C5D6B7A89E6 /* Beta */ = {
+			isa = PBXGroup;
+			children = (
+				KK001A2B3F8E4C5D6B7A89E1 /* BetaDailyView.swift */,
+				KK001A2B3F8E4C5D6B7A89E3 /* BetaDoseDetailView.swift */,
+				KK001A2B3F8E4C5D6B7A89E5 /* U100SyringeView.swift */,
+			);
+			path = Beta;
+			sourceTree = "<group>";
+		};
 		CC001A2B3F8E4C5D6B7A8960 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,9 +295,11 @@
 			isa = PBXGroup;
 			children = (
 				EE001A2B3F8E4C5D6B7A8983 /* GraphHubView.swift */,
+				II001A2B3F8E4C5D6B7A89C3 /* StatsOverviewView.swift */,
 				EE001A2B3F8E4C5D6B7A8985 /* SerumEstimateView.swift */,
 				EE001A2B3F8E4C5D6B7A8987 /* VitalsGraphView.swift */,
 				GG001A2B3F8E4C5D6B7A89AD /* UnifiedGraphView.swift */,
+				II001A2B3F8E4C5D6B7A89C5 /* LabsView.swift */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -422,6 +462,7 @@
 				AA001A2B3F8E4C5D6B7A890A /* DailyVitals.swift in Sources */,
 				AA001A2B3F8E4C5D6B7A890C /* DailyNote.swift in Sources */,
 				AA001A2B3F8E4C5D6B7A890E /* SchedulingService.swift in Sources */,
+				II001A2B3F8E4C5D6B7A89C6 /* LabResultEditorSheet.swift in Sources */,
 				BB001A2B3F8E4C5D6B7A893E /* Color+Hex.swift in Sources */,
 				BB001A2B3F8E4C5D6B7A893F /* StatusPillView.swift in Sources */,
 				BB001A2B3F8E4C5D6B7A8940 /* CalendarView.swift in Sources */,
@@ -439,9 +480,12 @@
 				DD001A2B3F8E4C5D6B7A8971 /* NotificationService.swift in Sources */,
 				EE001A2B3F8E4C5D6B7A8982 /* SerumCalculator.swift in Sources */,
 				EE001A2B3F8E4C5D6B7A8984 /* GraphHubView.swift in Sources */,
+				II001A2B3F8E4C5D6B7A89C2 /* StatsOverviewView.swift in Sources */,
 				EE001A2B3F8E4C5D6B7A8986 /* SerumEstimateView.swift in Sources */,
 				EE001A2B3F8E4C5D6B7A8988 /* VitalsGraphView.swift in Sources */,
+				II001A2B3F8E4C5D6B7A89C4 /* LabsView.swift in Sources */,
 				FF001A2B3F8E4C5D6B7A8992 /* SettingsView.swift in Sources */,
+				II001A2B3F8E4C5D6B7A89C0 /* LabReport.swift in Sources */,
 				GG001A2B3F8E4C5D6B7A89A0 /* LabResult.swift in Sources */,
 				GG001A2B3F8E4C5D6B7A89A2 /* SymptomTag.swift in Sources */,
 				GG001A2B3F8E4C5D6B7A89A4 /* DailySymptom.swift in Sources */,
@@ -451,6 +495,10 @@
 				GG001A2B3F8E4C5D6B7A89AC /* UnifiedGraphView.swift in Sources */,
 				GG001A2B3F8E4C5D6B7A89AE /* SymptomTagManagerView.swift in Sources */,
 				HH001A2B3F8E4C5D6B7A89B0 /* CompoundLibraryService.swift in Sources */,
+				JJ001A2B3F8E4C5D6B7A89D0 /* TodayView.swift in Sources */,
+				KK001A2B3F8E4C5D6B7A89E0 /* BetaDailyView.swift in Sources */,
+				KK001A2B3F8E4C5D6B7A89E2 /* BetaDoseDetailView.swift in Sources */,
+				KK001A2B3F8E4C5D6B7A89E4 /* U100SyringeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

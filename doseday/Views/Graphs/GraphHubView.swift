@@ -17,9 +17,37 @@ enum DateRangeOption: String, CaseIterable {
     }
 }
 
+enum StatsSection: String, CaseIterable {
+    case overview = "Overview"
+    case compare = "Compare"
+    case labs = "Labs"
+}
+
 struct GraphHubView: View {
+    @State private var selectedSection: StatsSection = .overview
+
     var body: some View {
-        UnifiedGraphView()
-            .navigationTitle("Graphs")
+        VStack(spacing: 0) {
+            Picker("Section", selection: $selectedSection) {
+                ForEach(StatsSection.allCases, id: \.self) { section in
+                    Text(section.rawValue).tag(section)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding([.horizontal, .top])
+
+            switch selectedSection {
+            case .overview:
+                StatsOverviewView(
+                    onOpenCompare: { selectedSection = .compare },
+                    onOpenLabs: { selectedSection = .labs }
+                )
+            case .compare:
+                UnifiedGraphView()
+            case .labs:
+                LabsView()
+            }
+        }
+        .navigationTitle("Stats")
     }
 }

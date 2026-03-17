@@ -24,6 +24,15 @@ struct DayView: View {
         allNotes.first { Calendar.current.isDate($0.date, inSameDayAs: date) }
     }
 
+    private var recentInjectionEvents: [DoseEvent] {
+        let tenDaysAgo = Calendar.current.date(byAdding: .day, value: -10, to: date) ?? date
+        return allEvents.filter {
+            $0.drug?.route == .injection &&
+            $0.status == .taken &&
+            ($0.takenAt ?? .distantPast) >= tenDaysAgo
+        }
+    }
+
     private var drugSummaries: [(name: String, count: Int)] {
         var counts: [String: Int] = [:]
         var order: [String] = []
@@ -87,13 +96,13 @@ struct DayView: View {
                     }
                 }
 
-                // Injection map (read-only heat map, shown when any injection event exists)
-                if dayEvents.contains(where: { $0.drug?.route == .injection }) {
+                // Injection map — show if today has injection doses OR there are recent history markers
+                if dayEvents.contains(where: { $0.drug?.route == .injection }) || !recentInjectionEvents.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Injection Map")
                             .font(.headline)
                             .padding(.horizontal)
-                        BodyMapView(historyEvents: dayEvents, isPickerMode: false)
+                        BodyMapView(historyEvents: recentInjectionEvents, isPickerMode: false)
                     }
                 }
 

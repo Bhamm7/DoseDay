@@ -51,7 +51,7 @@ struct DayCellView: View {
         .padding(2)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityLabel)
-        .accessibilityHint("Opens day view")
+        .accessibilityHint("Selects day")
         .accessibilityAddTraits(isToday ? .isSelected : [])
     }
 

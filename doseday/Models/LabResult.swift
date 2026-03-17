@@ -14,6 +14,8 @@ final class LabResult {
     var createdAt: Date
     var updatedAt: Date
 
+    var report: LabReport?
+
     var isOutOfRange: Bool {
         if let low = referenceRangeLow, value < low { return true }
         if let high = referenceRangeHigh, value > high { return true }
@@ -29,6 +31,7 @@ final class LabResult {
         referenceRangeLow: Double? = nil,
         referenceRangeHigh: Double? = nil,
         notes: String = "",
+        report: LabReport? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
@@ -40,6 +43,7 @@ final class LabResult {
         self.referenceRangeLow = referenceRangeLow
         self.referenceRangeHigh = referenceRangeHigh
         self.notes = notes
+        self.report = report
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

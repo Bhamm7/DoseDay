@@ -1,20 +1,6 @@
 import SwiftUI
 import SwiftData
 
-private let commonTests: [(name: String, unit: String)] = [
-    ("Total Testosterone", "ng/dL"),
-    ("Free Testosterone",  "pg/mL"),
-    ("Estradiol",          "pg/mL"),
-    ("LH",                 "mIU/mL"),
-    ("FSH",                "mIU/mL"),
-    ("Hematocrit",         "%"),
-    ("Hemoglobin",         "g/dL"),
-    ("SHBG",               "nmol/L"),
-    ("PSA",                "ng/mL"),
-    ("TSH",                "mIU/L"),
-    ("Cortisol",           "mcg/dL"),
-]
-
 struct LabResultsEditorView: View {
     @Environment(\.modelContext) private var modelContext
     let date: Date
@@ -82,144 +68,36 @@ struct LabResultsEditorView: View {
             }
         }
         .sheet(isPresented: $showingEntry) {
-            LabResultEntrySheet(date: date, result: editingResult) { newResult in
-                if editingResult == nil {
-                    modelContext.insert(newResult)
-                } else {
-                    editingResult?.testName = newResult.testName
-                    editingResult?.value = newResult.value
-                    editingResult?.unit = newResult.unit
-                    editingResult?.referenceRangeLow = newResult.referenceRangeLow
-                    editingResult?.referenceRangeHigh = newResult.referenceRangeHigh
-                    editingResult?.notes = newResult.notes
-                    editingResult?.updatedAt = Date()
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Entry Sheet
-
-private struct LabResultEntrySheet: View {
-    @Environment(\.dismiss) private var dismiss
-    let date: Date
-    let result: LabResult?
-    let onSave: (LabResult) -> Void
-
-    @State private var selectedTestIndex: Int = 0
-    @State private var isCustom = false
-    @State private var customName = ""
-    @State private var valueText = ""
-    @State private var unit = ""
-    @State private var refLowText = ""
-    @State private var refHighText = ""
-    @State private var notes = ""
-
-    private var testName: String {
-        isCustom ? customName : commonTests[selectedTestIndex].name
-    }
-
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section("Test") {
-                    if !isCustom {
-                        Picker("Test name", selection: $selectedTestIndex) {
-                            ForEach(commonTests.indices, id: \.self) { i in
-                                Text(commonTests[i].name).tag(i)
-                            }
-                        }
-                        .onChange(of: selectedTestIndex) {
-                            unit = commonTests[selectedTestIndex].unit
-                        }
+            LabResultEditorSheet(date: editingResult?.date ?? date, result: editingResult) { action in
+                switch action {
+                case .save(let draft):
+                    if let existing = editingResult {
+                        existing.date = Calendar.current.startOfDay(for: draft.date)
+                        existing.testName = draft.testName
+                        existing.value = draft.value
+                        existing.unit = draft.unit
+                        existing.referenceRangeLow = draft.referenceRangeLow
+                        existing.referenceRangeHigh = draft.referenceRangeHigh
+                        existing.notes = draft.notes
+                        existing.updatedAt = Date()
+                    } else {
+                        let result = LabResult(
+                            date: draft.date,
+                            testName: draft.testName,
+                            value: draft.value,
+                            unit: draft.unit,
+                            referenceRangeLow: draft.referenceRangeLow,
+                            referenceRangeHigh: draft.referenceRangeHigh,
+                            notes: draft.notes
+                        )
+                        modelContext.insert(result)
                     }
-                    Toggle("Custom test name", isOn: $isCustom)
-                    if isCustom {
-                        TextField("Test name", text: $customName)
-                    }
-                }
-
-                Section("Result") {
-                    HStack {
-                        TextField("Value", text: $valueText)
-                            .keyboardType(.decimalPad)
-                        TextField("Unit", text: $unit)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                Section("Reference Range (optional)") {
-                    HStack {
-                        TextField("Low", text: $refLowText)
-                            .keyboardType(.decimalPad)
-                        Text("–")
-                        TextField("High", text: $refHighText)
-                            .keyboardType(.decimalPad)
-                    }
-                }
-
-                Section("Notes") {
-                    TextField("Notes", text: $notes, axis: .vertical)
-                        .lineLimit(2...4)
-                }
-
-                if result != nil {
-                    Section {
-                        Button("Delete", role: .destructive) {
-                            // Caller handles deletion by checking result != nil
-                            onSave(buildResult())
-                            dismiss()
-                        }
+                case .delete:
+                    if let existing = editingResult {
+                        modelContext.delete(existing)
                     }
                 }
             }
-            .navigationTitle(result == nil ? "Add Lab Result" : "Edit Lab Result")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        onSave(buildResult())
-                        dismiss()
-                    }
-                    .disabled(valueText.isEmpty || testName.isEmpty)
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-            }
-            .onAppear { populateFromResult() }
         }
-    }
-
-    private func populateFromResult() {
-        guard let r = result else {
-            unit = commonTests[0].unit
-            return
-        }
-        if let idx = commonTests.firstIndex(where: { $0.name == r.testName }) {
-            selectedTestIndex = idx
-            isCustom = false
-        } else {
-            isCustom = true
-            customName = r.testName
-        }
-        valueText = r.value.formatted(.number.precision(.fractionLength(1)))
-        unit = r.unit
-        if let low = r.referenceRangeLow { refLowText = low.formatted(.number.precision(.fractionLength(1))) }
-        if let high = r.referenceRangeHigh { refHighText = high.formatted(.number.precision(.fractionLength(1))) }
-        notes = r.notes
-    }
-
-    private func buildResult() -> LabResult {
-        LabResult(
-            date: date,
-            testName: testName,
-            value: Double(valueText) ?? 0,
-            unit: unit,
-            referenceRangeLow: Double(refLowText),
-            referenceRangeHigh: Double(refHighText),
-            notes: notes
-        )
     }
 }

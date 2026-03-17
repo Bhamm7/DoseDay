@@ -31,6 +31,7 @@ struct UnifiedGraphView: View {
 
     // Lab marker toggles (keyed by test name)
     @State private var enabledLabTests: Set<String> = []
+    @State private var showOnlyOutOfRangeLabs = false
 
     // Symptom tag toggles
     @State private var enabledTagIds: Set<UUID> = []
@@ -56,12 +57,16 @@ struct UnifiedGraphView: View {
         allLabResults.filter { dateInterval.contains($0.date) }
     }
 
+    private var selectableLabResults: [LabResult] {
+        filteredLabResults.filter { !showOnlyOutOfRangeLabs || $0.isOutOfRange }
+    }
+
     private var filteredSymptoms: [DailySymptom] {
         allSymptoms.filter { dateInterval.contains($0.date) }
     }
 
     private var labTestNames: [String] {
-        Array(Set(filteredLabResults.map(\.testName))).sorted()
+        Array(Set(selectableLabResults.map(\.testName))).sorted()
     }
 
     private var selectedDrugs: [Drug] {
@@ -183,6 +188,10 @@ struct UnifiedGraphView: View {
         // Labs
         if !labTestNames.isEmpty {
             chipSectionHeader("Labs")
+            HStack(spacing: 8) {
+                MetricToggleChip(label: "Out of Range Only", color: .orange, isOn: $showOnlyOutOfRangeLabs)
+            }
+            .padding(.horizontal)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(labTestNames, id: \.self) { name in
@@ -424,7 +433,7 @@ struct UnifiedGraphView: View {
     private var labAndSymptomCharts: some View {
         // Lab markers
         ForEach(labTestNames.filter { enabledLabTests.contains($0) }, id: \.self) { testName in
-            let data = filteredLabResults.filter { $0.testName == testName }
+            let data = selectableLabResults.filter { $0.testName == testName }
             if !data.isEmpty {
                 let unit = data.first?.unit ?? ""
                 chartSection(title: "\(testName) (\(unit))") {

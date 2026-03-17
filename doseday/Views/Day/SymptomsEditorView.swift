@@ -1,9 +1,37 @@
 import SwiftUI
 import SwiftData
 
+struct SymptomsEditorStyle {
+    let titleColor: Color
+    let inactiveFill: Color
+    let inactiveStroke: Color
+    let inactiveForeground: Color
+    let activeForeground: Color?
+    let activeTintOpacity: Double
+
+    static let standard = SymptomsEditorStyle(
+        titleColor: .primary,
+        inactiveFill: Color.secondary.opacity(0.1),
+        inactiveStroke: .clear,
+        inactiveForeground: .secondary,
+        activeForeground: nil,
+        activeTintOpacity: 0.15
+    )
+
+    static let beta = SymptomsEditorStyle(
+        titleColor: Color(hex: "#334237"),
+        inactiveFill: Color(hex: "#E4EEE1"),
+        inactiveStroke: Color(hex: "#D6E0D3"),
+        inactiveForeground: Color(hex: "#6E8C72"),
+        activeForeground: Color(hex: "#334237"),
+        activeTintOpacity: 0.2
+    )
+}
+
 struct SymptomsEditorView: View {
     @Environment(\.modelContext) private var modelContext
     let date: Date
+    var style: SymptomsEditorStyle = .standard
     @Query(sort: \SymptomTag.sortOrder) private var allTags: [SymptomTag]
     @Query private var allSymptoms: [DailySymptom]
 
@@ -19,6 +47,7 @@ struct SymptomsEditorView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Symptoms")
                 .font(.headline)
+                .foregroundStyle(style.titleColor)
                 .padding(.horizontal)
 
             if allTags.isEmpty {
@@ -32,6 +61,7 @@ struct SymptomsEditorView: View {
                         SymptomChip(
                             tag: tag,
                             symptom: symptom(for: tag),
+                            style: style,
                             onTap: { handleTap(tag: tag) }
                         )
                     }
@@ -60,6 +90,7 @@ struct SymptomsEditorView: View {
 private struct SymptomChip: View {
     let tag: SymptomTag
     let symptom: DailySymptom?
+    let style: SymptomsEditorStyle
     let onTap: () -> Void
 
     private var isActive: Bool { symptom != nil }
@@ -89,12 +120,12 @@ private struct SymptomChip: View {
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
-            .background(isActive ? Color(hex: tag.colorHex).opacity(0.15) : Color.secondary.opacity(0.1))
+            .background(isActive ? Color(hex: tag.colorHex).opacity(style.activeTintOpacity) : style.inactiveFill)
             .overlay {
-                Capsule().strokeBorder(isActive ? Color(hex: tag.colorHex) : Color.clear, lineWidth: 1.5)
+                Capsule().strokeBorder(isActive ? Color(hex: tag.colorHex).opacity(0.75) : style.inactiveStroke, lineWidth: 1.2)
             }
             .clipShape(Capsule())
-            .foregroundStyle(isActive ? Color(hex: tag.colorHex) : .secondary)
+            .foregroundStyle(isActive ? (style.activeForeground ?? Color(hex: tag.colorHex)) : style.inactiveForeground)
         }
         .buttonStyle(.plain)
         .accessibilityLabel(tag.name)

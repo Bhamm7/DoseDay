@@ -40,6 +40,24 @@ enum GlucoseUnit: String, CaseIterable, Codable {
     }
 }
 
+enum LabSourceType: String, CaseIterable, Codable {
+    case manual = "manual"
+    case pdfImport = "pdfImport"
+    case photoImport = "photoImport"
+    case csvImport = "csvImport"
+    case portalImport = "portalImport"
+
+    var displayName: String {
+        switch self {
+        case .manual: return "Manual"
+        case .pdfImport: return "PDF"
+        case .photoImport: return "Photo"
+        case .csvImport: return "CSV"
+        case .portalImport: return "Portal"
+        }
+    }
+}
+
 enum InjectionSite: Equatable {
     // Traps
     case leftTrap, rightTrap

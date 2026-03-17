@@ -8,6 +8,7 @@ struct VitalsEditorView: View {
 
     let date: Date
     let vitals: DailyVitals?
+    var title: String = "Vitals"
 
     @State private var weightText: String = ""
     @State private var systolic: String = ""
@@ -17,13 +18,13 @@ struct VitalsEditorView: View {
     @State private var savedAt: Date? = nil
 
     private var glucoseUnit: GlucoseUnit { GlucoseUnit(rawValue: glucoseUnitRaw) ?? .mmolL }
-    private var weightLabel: String { weightUnit == "lbs" ? "Weight (lbs)" : "Weight (kg)" }
-    private var glucoseLabel: String { "Glucose (\(glucoseUnit.displayName))" }
+    private var weightLabel: String { VitalsEditorSupport.weightLabel(weightUnit: weightUnit) }
+    private var glucoseLabel: String { VitalsEditorSupport.glucoseLabel(glucoseUnit: glucoseUnit) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Vitals")
+                Text(title)
                     .font(.headline)
                 Spacer()
                 if let savedAt {
@@ -97,34 +98,35 @@ struct VitalsEditorView: View {
         }
         .padding(.horizontal)
         .onAppear { loadVitals() }
+        .onChange(of: date) { _, _ in loadVitals() }
+        .onChange(of: vitals?.id) { _, _ in loadVitals() }
         .onChange(of: weightUnit) { _, _ in loadVitals() }
         .onChange(of: glucoseUnitRaw) { _, _ in loadVitals() }
     }
 
     private func loadVitals() {
-        guard let v = vitals else { return }
-
-        if let kg = v.weightKg {
-            let display = weightUnit == "lbs" ? kg * 2.20462 : kg
-            weightText = String(format: "%.1f", display)
-        } else {
-            weightText = ""
-        }
-
-        systolic = v.systolicBP.map { String($0) } ?? ""
-        diastolic = v.diastolicBP.map { String($0) } ?? ""
-        hr = v.restingHR.map { String($0) } ?? ""
-
-        if let raw = v.glucoseValue {
-            let converted = convertGlucose(raw, from: v.glucoseUnit, to: glucoseUnit)
-            let fmt = glucoseUnit == .mgdL ? "%.0f" : "%.1f"
-            glucose = String(format: fmt, converted)
-        } else {
-            glucose = ""
-        }
+        savedAt = nil
+        let draft = VitalsDraft(vitals: vitals, weightUnit: weightUnit, glucoseUnit: glucoseUnit)
+        weightText = draft.weightText
+        systolic = draft.systolic
+        diastolic = draft.diastolic
+        hr = draft.hr
+        glucose = draft.glucose
     }
 
     private func saveVitals() {
+        let draft = VitalsDraft(
+            weightText: weightText,
+            systolic: systolic,
+            diastolic: diastolic,
+            hr: hr,
+            glucose: glucose
+        )
+
+        if vitals == nil && draft.isEmpty {
+            return
+        }
+
         let target: DailyVitals
         if let existing = vitals {
             target = existing
@@ -133,8 +135,75 @@ struct VitalsEditorView: View {
             modelContext.insert(target)
         }
 
-        if let w = Double(weightText) {
-            target.weightKg = weightUnit == "lbs" ? w / 2.20462 : w
+        target.date = Calendar.current.startOfDay(for: date)
+
+        draft.apply(to: target, weightUnit: weightUnit, glucoseUnit: glucoseUnit)
+
+        savedAt = Date()
+    }
+}
+
+struct VitalsDraft: Equatable {
+    var weightText: String = ""
+    var systolic: String = ""
+    var diastolic: String = ""
+    var hr: String = ""
+    var glucose: String = ""
+
+    init(
+        weightText: String = "",
+        systolic: String = "",
+        diastolic: String = "",
+        hr: String = "",
+        glucose: String = ""
+    ) {
+        self.weightText = weightText
+        self.systolic = systolic
+        self.diastolic = diastolic
+        self.hr = hr
+        self.glucose = glucose
+    }
+
+    init(vitals: DailyVitals?, weightUnit: String, glucoseUnit: GlucoseUnit) {
+        guard let vitals else {
+            self.init()
+            return
+        }
+
+        var weightText = ""
+        if let kg = vitals.weightKg {
+            let displayWeight = weightUnit == "lbs" ? kg * 2.20462 : kg
+            weightText = String(format: "%.1f", displayWeight)
+        }
+
+        let systolic = vitals.systolicBP.map(String.init) ?? ""
+        let diastolic = vitals.diastolicBP.map(String.init) ?? ""
+        let hr = vitals.restingHR.map(String.init) ?? ""
+
+        var glucose = ""
+        if let rawGlucose = vitals.glucoseValue {
+            let converted = VitalsEditorSupport.convertGlucose(rawGlucose, from: vitals.glucoseUnit, to: glucoseUnit)
+            let format = glucoseUnit == .mgdL ? "%.0f" : "%.1f"
+            glucose = String(format: format, converted)
+        }
+
+        self.init(
+            weightText: weightText,
+            systolic: systolic,
+            diastolic: diastolic,
+            hr: hr,
+            glucose: glucose
+        )
+    }
+
+    var isEmpty: Bool {
+        [weightText, systolic, diastolic, hr, glucose]
+            .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+    }
+
+    func apply(to target: DailyVitals, weightUnit: String, glucoseUnit: GlucoseUnit) {
+        if let weightValue = Double(weightText) {
+            target.weightKg = weightUnit == "lbs" ? weightValue / 2.20462 : weightValue
         } else {
             target.weightKg = nil
         }
@@ -143,18 +212,25 @@ struct VitalsEditorView: View {
         target.diastolicBP = Int(diastolic)
         target.restingHR = Int(hr)
 
-        if let g = Double(glucose) {
-            target.glucoseValue = g
+        if let glucoseValue = Double(glucose) {
+            target.glucoseValue = glucoseValue
             target.glucoseUnit = glucoseUnit
         } else {
             target.glucoseValue = nil
         }
+    }
+}
 
-        savedAt = Date()
+enum VitalsEditorSupport {
+    static func weightLabel(weightUnit: String) -> String {
+        weightUnit == "lbs" ? "Weight (lbs)" : "Weight (kg)"
     }
 
-    /// Convert a glucose reading between units.
-    private func convertGlucose(_ value: Double, from: GlucoseUnit, to: GlucoseUnit) -> Double {
+    static func glucoseLabel(glucoseUnit: GlucoseUnit) -> String {
+        "Glucose (\(glucoseUnit.displayName))"
+    }
+
+    static func convertGlucose(_ value: Double, from: GlucoseUnit, to: GlucoseUnit) -> Double {
         guard from != to else { return value }
         return from == .mmolL ? value * 18.0182 : value / 18.0182
     }

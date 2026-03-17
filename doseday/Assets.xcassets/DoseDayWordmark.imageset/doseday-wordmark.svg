@@ -1,0 +1,28 @@
+<svg width="720" height="220" viewBox="0 0 720 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="softShadow" x="0" y="0" width="720" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feOffset dy="5"/>
+      <feGaussianBlur stdDeviation="5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.22 0 0 0 0 0.26 0 0 0 0 0.23 0 0 0 0.16 0"/>
+      <feBlend in2="SourceGraphic" result="shape"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <g transform="translate(36 26)">
+      <path d="M56 154V20H137C170.1 20 197 46.9 197 80C197 113.1 170.1 140 137 140H97V154" stroke="#556B50" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M68 154V32H137C163.5 32 185 53.5 185 80C185 106.5 163.5 128 137 128H109V154" stroke="#7C916E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M80 154V44H137C156.8 44 173 60.2 173 80C173 99.8 156.8 116 137 116H121V154" stroke="#A3AE95" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M92 154V56H137C150.2 56 161 66.8 161 80C161 93.2 150.2 104 137 104H133V154" stroke="#D9D8C7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M106 154V72H136.5C140.6 72 144 75.4 144 79.5C144 83.6 140.6 87 136.5 87H120V154" stroke="#37413A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <text x="206" y="110" fill="#556B50" font-size="92" font-weight="700" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif" letter-spacing="-3.4">DoseDay</text>
+
+      <path d="M146 129H520" stroke="#556B50" stroke-width="10" stroke-linecap="round"/>
+      <path d="M108 145H638" stroke="#E7EBCF" stroke-width="10" stroke-linecap="round"/>
+      <path d="M96 158H626" stroke="#C7CFB2" stroke-width="9" stroke-linecap="round"/>
+      <path d="M84 171H614" stroke="#7C916E" stroke-width="9" stroke-linecap="round"/>
+      <path d="M72 184H602" stroke="#556B50" stroke-width="9" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

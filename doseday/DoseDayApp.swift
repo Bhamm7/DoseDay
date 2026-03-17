@@ -12,6 +12,7 @@ import SwiftData
 struct DoseDayApp: App {
     @AppStorage("symptomTagsSeeded") private var symptomTagsSeeded = false
     @AppStorage("testDataSeeded") private var testDataSeeded = false
+    @AppStorage("testLabDataSeeded") private var testLabDataSeeded = false
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -20,6 +21,7 @@ struct DoseDayApp: App {
             DoseEvent.self,
             DailyVitals.self,
             DailyNote.self,
+            LabReport.self,
             LabResult.self,
             SymptomTag.self,
             DailySymptom.self,
@@ -39,6 +41,7 @@ struct DoseDayApp: App {
                 .task {
                     await seedSystemTagsIfNeeded()
                     await seedTestDataIfNeeded()
+                    await seedTestLabDataIfNeeded()
                 }
         }
         .modelContainer(sharedModelContainer)
@@ -76,6 +79,8 @@ struct DoseDayApp: App {
             doseAmount: Double,
             doseUnit: String,
             halfLifeHours: Double,
+            reconstitutionAmount: Double? = nil,
+            reconstitutionDiluentML: Double? = nil,
             schedule: ScheduleDefinition
         ) -> Drug {
             let data = (try? schedule.encoded()) ?? Data()
@@ -85,6 +90,8 @@ struct DoseDayApp: App {
                 colorHex: colorHex,
                 doseUnit: doseUnit,
                 halfLifeHours: halfLifeHours,
+                reconstitutionAmount: reconstitutionAmount,
+                reconstitutionDiluentML: reconstitutionDiluentML,
                 scheduleData: data
             )
             drug.protocol = proto
@@ -100,6 +107,8 @@ struct DoseDayApp: App {
             doseAmount: 5,
             doseUnit: "mg",
             halfLifeHours: 168,
+            reconstitutionAmount: 30,
+            reconstitutionDiluentML: 3,
             schedule: ScheduleDefinition(
                 frequencyType: .everyNDays,
                 times: [LocalTime(hour: 9, minute: 0)],
@@ -117,6 +126,8 @@ struct DoseDayApp: App {
             doseAmount: 100,
             doseUnit: "mg",
             halfLifeHours: 192,
+            reconstitutionAmount: 200,
+            reconstitutionDiluentML: 1,
             schedule: ScheduleDefinition(
                 frequencyType: .specificDays,
                 times: [LocalTime(hour: 9, minute: 0)],
@@ -134,6 +145,8 @@ struct DoseDayApp: App {
             doseAmount: 600,
             doseUnit: "mg",
             halfLifeHours: 2,
+            reconstitutionAmount: 1200,
+            reconstitutionDiluentML: 1,
             schedule: ScheduleDefinition(
                 frequencyType: .specificDays,
                 times: [LocalTime(hour: 9, minute: 0)],
@@ -215,5 +228,95 @@ struct DoseDayApp: App {
 
         try? context.save()
         testDataSeeded = true
+    }
+
+    @MainActor
+    private func seedTestLabDataIfNeeded() async {
+        guard !testLabDataSeeded else { return }
+        let context = sharedModelContainer.mainContext
+        let existingReports = (try? context.fetch(FetchDescriptor<LabReport>()))?.count ?? 0
+        let existingResults = (try? context.fetch(FetchDescriptor<LabResult>()))?.count ?? 0
+        guard existingReports == 0 && existingResults == 0 else {
+            testLabDataSeeded = true
+            return
+        }
+
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: Date())
+
+        func makeReport(
+            daysAgo: Int,
+            title: String,
+            source: String,
+            sourceType: LabSourceType,
+            filename: String,
+            results: [(name: String, value: Double, unit: String, low: Double?, high: Double?)]
+        ) {
+            guard let collectedAt = cal.date(byAdding: .day, value: -daysAgo, to: today) else { return }
+            let report = LabReport(
+                collectedAt: collectedAt,
+                sourceName: source,
+                sourceType: sourceType,
+                reportTitle: title,
+                originalFilename: filename,
+                importedAt: Date()
+            )
+            context.insert(report)
+
+            for item in results {
+                let result = LabResult(
+                    date: collectedAt,
+                    testName: item.name,
+                    value: item.value,
+                    unit: item.unit,
+                    referenceRangeLow: item.low,
+                    referenceRangeHigh: item.high,
+                    report: report
+                )
+                context.insert(result)
+            }
+        }
+
+        makeReport(
+            daysAgo: 28,
+            title: "Hormone Panel",
+            source: "Optimize Labs",
+            sourceType: .pdfImport,
+            filename: "hormone-panel-mar.pdf",
+            results: [
+                ("Total Testosterone", 912, "ng/dL", 250, 1100),
+                ("Free Testosterone", 27.8, "pg/mL", 8.7, 25.1),
+                ("Estradiol", 52, "pg/mL", 10, 40),
+                ("SHBG", 24, "nmol/L", 10, 57),
+            ]
+        )
+
+        makeReport(
+            daysAgo: 14,
+            title: "CBC",
+            source: "Dynacare",
+            sourceType: .portalImport,
+            filename: "cbc-mar.csv",
+            results: [
+                ("Hematocrit", 51.8, "%", 38.8, 50.0),
+                ("Hemoglobin", 17.1, "g/dL", 13.2, 16.6),
+                ("PSA", 0.8, "ng/mL", 0, 4.0),
+            ]
+        )
+
+        makeReport(
+            daysAgo: 5,
+            title: "Metabolic Panel",
+            source: "LifeLabs",
+            sourceType: .photoImport,
+            filename: "cmp-photo.jpg",
+            results: [
+                ("TSH", 1.7, "mIU/L", 0.4, 4.0),
+                ("Cortisol", 15.2, "mcg/dL", 6.0, 18.4),
+            ]
+        )
+
+        try? context.save()
+        testLabDataSeeded = true
     }
 }
