@@ -55,6 +55,13 @@
 		KK001A2B3F8E4C5D6B7A89E0 /* BetaDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK001A2B3F8E4C5D6B7A89E1 /* BetaDailyView.swift */; };
 		KK001A2B3F8E4C5D6B7A89E2 /* BetaDoseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK001A2B3F8E4C5D6B7A89E3 /* BetaDoseDetailView.swift */; };
 		KK001A2B3F8E4C5D6B7A89E4 /* U100SyringeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK001A2B3F8E4C5D6B7A89E5 /* U100SyringeView.swift */; };
+		LL001A2B3F8E4C5D6B7A89C2 /* DDTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89C3 /* DDTheme.swift */; };
+		LL001A2B3F8E4C5D6B7A89C4 /* StatusTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89C5 /* StatusTagView.swift */; };
+		LL001A2B3F8E4C5D6B7A89C6 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89C7 /* ScheduleView.swift */; };
+		LL001A2B3F8E4C5D6B7A89C8 /* CalendarDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89C9 /* CalendarDrawerView.swift */; };
+		LL001A2B3F8E4C5D6B7A89CA /* CompactVitalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89CB /* CompactVitalsView.swift */; };
+		LL001A2B3F8E4C5D6B7A89CC /* ScheduleDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89CD /* ScheduleDoseRow.swift */; };
+		LL001A2B3F8E4C5D6B7A89CE /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89CF /* ToolsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +132,13 @@
 		KK001A2B3F8E4C5D6B7A89E1 /* BetaDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDailyView.swift; sourceTree = "<group>"; };
 		KK001A2B3F8E4C5D6B7A89E3 /* BetaDoseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDoseDetailView.swift; sourceTree = "<group>"; };
 		KK001A2B3F8E4C5D6B7A89E5 /* U100SyringeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = U100SyringeView.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89C3 /* DDTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDTheme.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89C5 /* StatusTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTagView.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89C7 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89C9 /* CalendarDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDrawerView.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89CB /* CompactVitalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactVitalsView.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89CD /* ScheduleDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDoseRow.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89CF /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				BB001A2B3F8E4C5D6B7A8931 /* Shared */,
+				LL001A2B3F8E4C5D6B7A89C0 /* Schedule */,
 				BB001A2B3F8E4C5D6B7A8932 /* Calendar */,
 				BB001A2B3F8E4C5D6B7A8933 /* Day */,
 				JJ001A2B3F8E4C5D6B7A89D2 /* Today */,
@@ -223,6 +238,7 @@
 				CC001A2B3F8E4C5D6B7A8960 /* Protocols */,
 				EE001A2B3F8E4C5D6B7A8980 /* Graphs */,
 				FF001A2B3F8E4C5D6B7A8990 /* Settings */,
+				LL001A2B3F8E4C5D6B7A89C1 /* Tools */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,9 +248,30 @@
 			children = (
 				BB001A2B3F8E4C5D6B7A8934 /* Color+Hex.swift */,
 				BB001A2B3F8E4C5D6B7A8935 /* StatusPillView.swift */,
+				LL001A2B3F8E4C5D6B7A89C3 /* DDTheme.swift */,
+				LL001A2B3F8E4C5D6B7A89C5 /* StatusTagView.swift */,
 				II001A2B3F8E4C5D6B7A89C7 /* LabResultEditorSheet.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		LL001A2B3F8E4C5D6B7A89C0 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				LL001A2B3F8E4C5D6B7A89C7 /* ScheduleView.swift */,
+				LL001A2B3F8E4C5D6B7A89C9 /* CalendarDrawerView.swift */,
+				LL001A2B3F8E4C5D6B7A89CB /* CompactVitalsView.swift */,
+				LL001A2B3F8E4C5D6B7A89CD /* ScheduleDoseRow.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		LL001A2B3F8E4C5D6B7A89C1 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				LL001A2B3F8E4C5D6B7A89CF /* ToolsView.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		BB001A2B3F8E4C5D6B7A8932 /* Calendar */ = {
@@ -499,6 +536,13 @@
 				KK001A2B3F8E4C5D6B7A89E0 /* BetaDailyView.swift in Sources */,
 				KK001A2B3F8E4C5D6B7A89E2 /* BetaDoseDetailView.swift in Sources */,
 				KK001A2B3F8E4C5D6B7A89E4 /* U100SyringeView.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89C2 /* DDTheme.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89C4 /* StatusTagView.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89C6 /* ScheduleView.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89C8 /* CalendarDrawerView.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89CA /* CompactVitalsView.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89CC /* ScheduleDoseRow.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89CE /* ToolsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

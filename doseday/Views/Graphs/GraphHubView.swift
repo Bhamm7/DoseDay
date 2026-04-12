@@ -48,6 +48,7 @@ struct GraphHubView: View {
                 LabsView()
             }
         }
-        .navigationTitle("Stats")
+        .navigationTitle("Reports")
+        .tint(DDTheme.accent)
     }
 }

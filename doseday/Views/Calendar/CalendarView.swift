@@ -52,15 +52,15 @@ struct CalendarView: View {
                                 } label: {
                                     Text(drug.name)
                                         .font(.caption.weight(.semibold))
-                                        .padding(.horizontal, 10).padding(.vertical, 5)
-                                        .background(active ? Color(hex: drug.colorHex).opacity(0.18)
-                                                           : Color.secondary.opacity(0.1))
+                                        .padding(.horizontal, 8).padding(.vertical, 4)
+                                        .background(active ? Color(hex: drug.colorHex).opacity(0.15)
+                                                           : DDTheme.cardBorder.opacity(0.5))
                                         .overlay {
-                                            Capsule().strokeBorder(active ? Color(hex: drug.colorHex) : .clear,
-                                                                   lineWidth: 1.5)
+                                            RoundedRectangle(cornerRadius: DDTheme.radiusSmall)
+                                                .strokeBorder(active ? Color(hex: drug.colorHex) : .clear, lineWidth: 1.5)
                                         }
-                                        .clipShape(Capsule())
-                                        .foregroundStyle(active ? Color(hex: drug.colorHex) : .secondary)
+                                        .clipShape(RoundedRectangle(cornerRadius: DDTheme.radiusSmall))
+                                        .foregroundStyle(active ? Color(hex: drug.colorHex) : DDTheme.textSecondary)
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityLabel(drug.name)
@@ -217,7 +217,7 @@ private struct CalendarDayRow: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel("Mark \(event.drug?.name ?? "dose") as taken")
             } else {
-                StatusPillView(status: event.status)
+                StatusTagView(status: event.status)
                     .padding(.trailing)
             }
         }
