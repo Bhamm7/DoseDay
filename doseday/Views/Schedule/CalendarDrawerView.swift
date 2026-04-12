@@ -45,12 +45,6 @@ struct CalendarDrawerView: View {
             drawerHandle
         }
         .background(DDTheme.card)
-        .overlay(
-            Rectangle()
-                .fill(DDTheme.cardBorder)
-                .frame(height: 1),
-            alignment: .bottom
-        )
     }
 
     // MARK: - Date bar (collapsed state)
@@ -172,10 +166,14 @@ struct CalendarDrawerView: View {
             }
         } label: {
             VStack(spacing: 0) {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(DDTheme.textTertiary.opacity(0.5))
-                    .frame(width: 40, height: 4)
-                    .padding(.vertical, 6)
+                Rectangle()
+                    .fill(DDTheme.cardBorder)
+                    .frame(height: 1)
+                RoundedRectangle(cornerRadius: 1.5)
+                    .fill(DDTheme.textTertiary.opacity(0.4))
+                    .frame(width: 36, height: 3)
+                    .padding(.top, 6)
+                    .padding(.bottom, 8)
             }
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())

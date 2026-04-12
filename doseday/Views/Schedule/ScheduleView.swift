@@ -36,6 +36,8 @@ struct ScheduleView: View {
     @Query private var allEvents: [DoseEvent]
     @Query private var allVitals: [DailyVitals]
     @Query private var allNotes: [DailyNote]
+    @Query private var allSymptoms: [DailySymptom]
+    @Query(sort: \SymptomTag.sortOrder) private var allTags: [SymptomTag]
 
     @State private var selectedDate: Date = Calendar.current.startOfDay(for: Date())
     @State private var displayedMonth: Date = {
@@ -45,6 +47,7 @@ struct ScheduleView: View {
     @State private var isCalendarExpanded = false
     @State private var collapsedSections: Set<TimeOfDay> = []
     @State private var selectedEvent: DoseEvent? = nil
+    @State private var showSymptomPicker = false
 
     private var dayEvents: [DoseEvent] {
         allEvents
@@ -71,6 +74,10 @@ struct ScheduleView: View {
             guard let events = groups[tod], !events.isEmpty else { return nil }
             return (tod, events)
         }
+    }
+
+    private var daySymptomsList: [DailySymptom] {
+        allSymptoms.filter { Calendar.current.isDate($0.date, inSameDayAs: selectedDate) }
     }
 
     private var recentInjectionEvents: [DoseEvent] {
@@ -120,14 +127,14 @@ struct ScheduleView: View {
                         }
                     }
 
-                    // Symptoms
+                    // Notes & Symptoms — unified
                     sectionCard {
-                        SymptomsEditorView(date: selectedDate)
-                    }
-
-                    // Notes
-                    sectionCard {
-                        NotesEditorView(date: selectedDate, note: dayNote)
+                        NotesSymptomsSectionView(
+                            date: selectedDate,
+                            note: dayNote,
+                            daySymptoms: daySymptomsList,
+                            onAddSymptom: { showSymptomPicker = true }
+                        )
                     }
 
                     // Lab results
@@ -143,6 +150,9 @@ struct ScheduleView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $selectedEvent) { event in
             DoseEventDetailSheet(event: event)
+        }
+        .sheet(isPresented: $showSymptomPicker) {
+            SymptomPickerSheet(date: selectedDate)
         }
         .onAppear { syncMonth(for: displayedMonth) }
         .onChange(of: displayedMonth) { _, newMonth in syncMonth(for: newMonth) }

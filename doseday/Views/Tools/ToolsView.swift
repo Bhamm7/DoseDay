@@ -41,15 +41,21 @@ struct ToolsView: View {
 
             Section {
                 NavigationLink {
+                    SymptomTagManagerView()
+                } label: {
+                    toolRow(icon: "heart.text.clipboard", title: "Symptoms Management")
+                }
+            } header: {
+                Text("Manage")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(DDTheme.textTertiary)
+            }
+
+            Section {
+                NavigationLink {
                     SettingsView()
                 } label: {
                     toolRow(icon: "gearshape", title: "App Settings")
-                }
-
-                NavigationLink {
-                    SymptomTagManagerView()
-                } label: {
-                    toolRow(icon: "tag", title: "Symptom Tags")
                 }
             } header: {
                 Text("Settings")
