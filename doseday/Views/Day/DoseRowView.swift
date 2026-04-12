@@ -13,9 +13,9 @@ struct DoseRowView: View {
                     .foregroundStyle(.secondary)
                     .frame(width: 60, alignment: .trailing)
 
-                Circle()
+                RoundedRectangle(cornerRadius: 1.5)
                     .fill(Color(hex: event.drug?.colorHex ?? "#999999"))
-                    .frame(width: 10, height: 10)
+                    .frame(width: 3, height: 28)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(event.drug?.name ?? "Unknown")
@@ -30,13 +30,16 @@ struct DoseRowView: View {
 
                 Spacer()
 
-                StatusPillView(status: event.status)
+                StatusTagView(status: event.status)
 
                 if event.status == .scheduled {
-                    Button("Mark taken", action: onMarkTaken)
+                    Button("Take", action: onMarkTaken)
                         .font(.caption.weight(.semibold))
-                        .buttonStyle(.bordered)
-                        .controlSize(.mini)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(DDTheme.accent)
+                        .clipShape(RoundedRectangle(cornerRadius: DDTheme.radiusSmall))
                         .accessibilityLabel("Mark \(event.drug?.name ?? "dose") as taken")
                 }
             }

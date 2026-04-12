@@ -54,14 +54,15 @@ struct DayView: View {
 
                     if !drugSummaries.isEmpty {
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 8) {
+                            HStack(spacing: 6) {
                                 ForEach(drugSummaries, id: \.name) { summary in
-                                    Text("\(summary.name) • \(summary.count)")
+                                    Text("\(summary.name) · \(summary.count)")
                                         .font(.caption.weight(.medium))
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 5)
-                                        .background(Color.secondary.opacity(0.15))
-                                        .clipShape(Capsule())
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .foregroundStyle(DDTheme.textSecondary)
+                                        .background(DDTheme.cardBorder.opacity(0.5))
+                                        .clipShape(RoundedRectangle(cornerRadius: DDTheme.radiusSmall))
                                 }
                             }
                         }

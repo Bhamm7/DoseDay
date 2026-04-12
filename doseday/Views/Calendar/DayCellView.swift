@@ -20,11 +20,11 @@ struct DayCellView: View {
                 .font(.system(size: 16, weight: isToday ? .bold : .regular))
                 .foregroundStyle(isToday ? .white : .primary)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(isToday ? Color.blue : Color.clear)
-                .clipShape(RoundedRectangle(cornerRadius: 6))
+                .background(isToday ? DDTheme.accent : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: DDTheme.radiusMedium))
                 .overlay {
                     if isSelected && !isToday {
-                        RoundedRectangle(cornerRadius: 6).strokeBorder(.blue, lineWidth: 1.5)
+                        RoundedRectangle(cornerRadius: DDTheme.radiusMedium).strokeBorder(DDTheme.accent, lineWidth: 1.5)
                     }
                 }
 

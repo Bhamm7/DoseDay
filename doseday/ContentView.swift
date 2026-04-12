@@ -12,18 +12,16 @@ import UIKit
 #endif
 
 private enum AppTab: Hashable {
-    case today
-    case beta
-    case calendar
-    case stats
+    case schedule
+    case reports
     case protocols
-    case settings
+    case tools
 }
 
 struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Query private var allEvents: [DoseEvent]
-    @State private var selectedTab: AppTab = .today
+    @State private var selectedTab: AppTab = .schedule
 
     init() {
         configureTabBarAppearance()
@@ -32,36 +30,20 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                TodayView()
+                ScheduleView()
             }
             .tabItem {
-                Label("Today", systemImage: "checklist")
+                Label("Schedule", systemImage: "calendar.badge.clock")
             }
-            .tag(AppTab.today)
-
-            NavigationStack {
-                BetaDailyView()
-            }
-            .tabItem {
-                Label("Beta", systemImage: "testtube.2")
-            }
-            .tag(AppTab.beta)
+            .tag(AppTab.schedule)
 
             NavigationStack {
                 GraphHubView()
             }
             .tabItem {
-                Label("Stats", systemImage: "chart.xyaxis.line")
+                Label("Reports", systemImage: "chart.xyaxis.line")
             }
-            .tag(AppTab.stats)
-
-            NavigationStack {
-                CalendarView()
-            }
-            .tabItem {
-                Label("Calendar", systemImage: "calendar")
-            }
-            .tag(AppTab.calendar)
+            .tag(AppTab.reports)
 
             NavigationStack {
                 ProtocolListView()
@@ -72,12 +54,12 @@ struct ContentView: View {
             .tag(AppTab.protocols)
 
             NavigationStack {
-                SettingsView()
+                ToolsView()
             }
             .tabItem {
-                Label("Settings", systemImage: "gearshape")
+                Label("Tools", systemImage: "wrench.and.screwdriver")
             }
-            .tag(AppTab.settings)
+            .tag(AppTab.tools)
         }
         .task {
             let service = NotificationService()
@@ -96,11 +78,11 @@ struct ContentView: View {
 private func configureTabBarAppearance() {
     let appearance = UITabBarAppearance()
     appearance.configureWithOpaqueBackground()
-    appearance.backgroundColor = UIColor(Color(hex: "#F7F2E4")).withAlphaComponent(0.98)
-    appearance.shadowColor = UIColor(Color(hex: "#E3DCC4"))
+    appearance.backgroundColor = UIColor.white
+    appearance.shadowColor = UIColor(DDTheme.cardBorder)
 
-    let normalColor = UIColor(Color(hex: "#73806F"))
-    let selectedColor = UIColor(Color(hex: "#556B50"))
+    let normalColor = UIColor(DDTheme.textTertiary)
+    let selectedColor = UIColor(DDTheme.accent)
     let stacked = appearance.stackedLayoutAppearance
 
     stacked.normal.iconColor = normalColor

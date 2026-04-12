@@ -86,7 +86,7 @@ struct SettingsView: View {
                     .font(.subheadline.weight(.medium))
                     .padding(.horizontal, 16)
                     .padding(.vertical, 10)
-                    .background(.regularMaterial, in: Capsule())
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: DDTheme.radiusLarge))
                     .padding(.bottom, 16)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                     .task {
