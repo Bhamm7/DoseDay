@@ -26,25 +26,26 @@ struct CalendarDrawerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Collapsed header — always visible
-            dateBar
+            // Main panel — full width white
+            VStack(spacing: 0) {
+                dateBar
 
-            // Expandable calendar
-            if isExpanded {
-                VStack(spacing: 6) {
-                    monthNav
-                    weekdayHeader
-                    calendarGrid
+                if isExpanded {
+                    VStack(spacing: 6) {
+                        monthNav
+                        weekdayHeader
+                        calendarGrid
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 6)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
                 }
-                .padding(.horizontal, 12)
-                .padding(.bottom, 10)
-                .transition(.opacity.combined(with: .move(edge: .top)))
             }
+            .background(DDTheme.card)
 
-            // Drawer handle
-            drawerHandle
+            // Protruding tab — half-circle folder tab
+            drawerTab
         }
-        .background(DDTheme.card)
     }
 
     // MARK: - Date bar (collapsed state)
@@ -157,28 +158,48 @@ struct CalendarDrawerView: View {
         }
     }
 
-    // MARK: - Drawer handle
+    // MARK: - Protruding folder tab
 
-    private var drawerHandle: some View {
+    private var drawerTab: some View {
         Button {
             withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
                 isExpanded.toggle()
             }
         } label: {
-            VStack(spacing: 0) {
-                Rectangle()
-                    .fill(DDTheme.cardBorder)
-                    .frame(height: 1)
-                RoundedRectangle(cornerRadius: 1.5)
-                    .fill(DDTheme.textTertiary.opacity(0.4))
-                    .frame(width: 36, height: 3)
-                    .padding(.top, 6)
-                    .padding(.bottom, 8)
+            HStack(spacing: 6) {
+                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(DDTheme.textTertiary)
             }
-            .frame(maxWidth: .infinity)
+            .frame(width: 80, height: 28)
+            .background(DDTheme.card)
+            .clipShape(UnevenRoundedRectangle(
+                topLeadingRadius: 0,
+                bottomLeadingRadius: 16,
+                bottomTrailingRadius: 16,
+                topTrailingRadius: 0
+            ))
+            .overlay(
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 0,
+                    bottomLeadingRadius: 16,
+                    bottomTrailingRadius: 16,
+                    topTrailingRadius: 0
+                )
+                .strokeBorder(DDTheme.cardBorder, lineWidth: 1)
+                // Mask away the top border so it's seamless with the panel
+                .mask(
+                    VStack(spacing: 0) {
+                        Color.clear.frame(height: 1)
+                        Color.black
+                    }
+                )
+            )
+            .shadow(color: .black.opacity(0.04), radius: 2, y: 2)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Helpers
