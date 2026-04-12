@@ -62,6 +62,7 @@
 		LL001A2B3F8E4C5D6B7A89CA /* CompactVitalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89CB /* CompactVitalsView.swift */; };
 		LL001A2B3F8E4C5D6B7A89CC /* ScheduleDoseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89CD /* ScheduleDoseRow.swift */; };
 		LL001A2B3F8E4C5D6B7A89CE /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89CF /* ToolsView.swift */; };
+		LL001A2B3F8E4C5D6B7A89D0 /* NotesSymptomsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL001A2B3F8E4C5D6B7A89D1 /* NotesSymptomsSectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		LL001A2B3F8E4C5D6B7A89CB /* CompactVitalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactVitalsView.swift; sourceTree = "<group>"; };
 		LL001A2B3F8E4C5D6B7A89CD /* ScheduleDoseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDoseRow.swift; sourceTree = "<group>"; };
 		LL001A2B3F8E4C5D6B7A89CF /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
+		LL001A2B3F8E4C5D6B7A89D1 /* NotesSymptomsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesSymptomsSectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 				LL001A2B3F8E4C5D6B7A89C9 /* CalendarDrawerView.swift */,
 				LL001A2B3F8E4C5D6B7A89CB /* CompactVitalsView.swift */,
 				LL001A2B3F8E4C5D6B7A89CD /* ScheduleDoseRow.swift */,
+				LL001A2B3F8E4C5D6B7A89D1 /* NotesSymptomsSectionView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				LL001A2B3F8E4C5D6B7A89CA /* CompactVitalsView.swift in Sources */,
 				LL001A2B3F8E4C5D6B7A89CC /* ScheduleDoseRow.swift in Sources */,
 				LL001A2B3F8E4C5D6B7A89CE /* ToolsView.swift in Sources */,
+				LL001A2B3F8E4C5D6B7A89D0 /* NotesSymptomsSectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
