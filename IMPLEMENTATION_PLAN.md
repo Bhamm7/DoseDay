@@ -23,11 +23,10 @@ DoseDay/
 │   ├── Scheduling/
 │   └── Notifications/
 ├── Views/
-│   ├── Calendar/
-│   ├── Day/
+│   ├── Schedule/
+│   ├── Reports/
 │   ├── Protocols/
-│   ├── Graphs/
-│   └── Settings/
+│   └── Tools/
 └── Resources/
 ```
 
@@ -40,21 +39,18 @@ See `docs/doseday/03_DATA_MODEL.md`
    - `InjectionSite` (leftGlute, rightGlute, etc.)
    - `GlucoseUnit` (mmolL, mgdL)
 
-2. **ScheduleDefinition** (Codable struct):
-   - frequencyType, timesOfDay, intervalDays, weekdays, doseAmount, startDate, endDate
+2. **Codable Structs**:
+   - `ScheduleDefinition` (frequencyType, timesOfDay, intervalDays, weekdays, doseAmount, startDate, endDate)
+   - `ReminderSettings` (enabled, minutesBefore, soundEnabled)
+   - `LocalTime` (hour, minute)
 
-3. **ReminderSettings** (Codable struct):
-   - enabled, minutesBefore, soundEnabled
-
-4. **LocalTime** (Codable struct):
-   - hour: Int, minute: Int
-
-5. **SwiftData Models** (in order):
+3. **SwiftData Models** (in order):
    - `MedicationProtocol` (avoid naming conflict with Swift Protocol)
    - `Drug` (references MedicationProtocol)
    - `DoseEvent` (references Drug)
    - `DailyVitals`
-   - `DailyNote`
+   - `DailySymptoms` (was DailyNote)
+   - `LabEntry` (new - bloodwork results)
 
 ### 1.3 Implement Scheduling Engine
 See `docs/doseday/04_SCHEDULING_ENGINE.md`
@@ -69,50 +65,52 @@ See `docs/doseday/04_SCHEDULING_ENGINE.md`
 
 ---
 
-## Phase 2: Core Views (Calendar + Day)
+## Phase 2: Core Views (Schedule Tab)
 
 ### 2.1 App Shell + Navigation
 See `docs/doseday/02_INFORMATION_ARCHITECTURE.md`
 
-- TabView with 4 tabs: Calendar, Graphs, Protocols, Settings
-- Create placeholder views for each tab
+- TabView with 4 tabs: Schedule, Reports, Protocols, Tools
+- Tab icons: 📅, 📊, 💊, 🔧
 
-### 2.2 Calendar View
+### 2.2 Schedule Tab
 See `docs/doseday/06_UI_SPECS.md`
 
-1. `MonthView.swift`:
-   - Month header with prev/next navigation
-   - 7-column LazyVGrid
-   - Query DoseEvents for visible date range
+1. `ScheduleView.swift` (main container):
+   - Date state management
+   - Header with navigation arrows + calendar toggle
 
-2. `DayCellView.swift`:
-   - Day number
-   - Up to 3 colored dots for drugs
-   - "+N" overflow indicator
+2. `ScheduleHeaderView.swift`:
+   - ◀ ▶ day navigation buttons
+   - Date display (tappable for picker)
+   - ▼ chevron for calendar expand/collapse
+   - 📌 pin toggle
 
-### 2.3 Day View
-See `docs/doseday/06_UI_SPECS.md`
+3. `InlineCalendarView.swift`:
+   - Month grid with day cells
+   - Drug color indicators
+   - Adherence shading
+   - Day tap → updates parent date state
 
-1. `DayView.swift`:
-   - Date header with drug summary chips
-   - Timeline list sorted by scheduledAt
-   - Vitals section
-   - Notes section
+4. `DoseTimelineView.swift`:
+   - List of doses sorted by scheduledAt
+   - Query DoseEvents for selected date
 
-2. `DoseRowView.swift`:
+5. `DoseRowView.swift`:
    - Time, drug name (with color dot), status pill
    - "Mark taken" button for scheduled doses
+   - Injection site subtitle if applicable
 
-3. `DoseEventDetailSheet.swift`:
+6. `DoseEventDetailSheet.swift`:
    - Mark taken (now or custom time)
    - Skip with optional reason
    - Injection site picker (if route == injection)
 
-4. `VitalsEditorView.swift`:
+7. `VitalsEditorView.swift`:
    - Weight, BP (sys/dia), HR, glucose fields
    - Save button
 
-5. `NotesEditorView.swift`:
+8. `SymptomsEditorView.swift`:
    - Side effects + observations text fields
    - Save button
 
@@ -122,7 +120,7 @@ See `docs/doseday/06_UI_SPECS.md`
 
 ### 3.1 Protocol List
 1. `ProtocolListView.swift`:
-   - List of protocols with name + date range
+   - List of protocols with name + date range + drug dots
    - Add button → AddProtocolFlow
 
 2. `ProtocolDetailView.swift`:
@@ -139,6 +137,7 @@ See `docs/doseday/06_UI_SPECS.md`
 2. `DrugEditorView.swift`:
    - Name, route, unit, color picker
    - Schedule type + times picker
+   - Dose amount with built-in calculator
    - Half-life hours
    - Reminder settings toggle
 
@@ -157,21 +156,20 @@ See `docs/doseday/05_NOTIFICATIONS.md`
 2. Integration:
    - Schedule notifications when DoseEvents are created
    - Reschedule when drug schedule changes
-   - Add "Test Notification" button in Settings
+   - Add "Test Notification" button in Tools > Settings
 
 ---
 
-## Phase 5: Graphs
+## Phase 5: Reports Tab
 
 See `docs/doseday/07_GRAPHS_SPECS.md`
 
-### 5.1 Graph Hub
-`GraphHubView.swift` with segmented picker:
-- Serum Estimates
-- Vitals
+### 5.1 Reports Hub
+`ReportsView.swift` with segmented picker:
+- Compounds | Vitals | Labs
 
-### 5.2 Serum Estimate Graph
-1. `SerumEstimateView.swift`:
+### 5.2 Compounds Segment
+1. `CompoundsReportView.swift`:
    - Drug multi-select
    - Date range picker (7D, 30D, 90D, Custom)
 
@@ -184,8 +182,8 @@ See `docs/doseday/07_GRAPHS_SPECS.md`
    - LineMark per drug (colored by drug.colorHex)
    - Label as "Visual Estimate Only"
 
-### 5.3 Vitals Graph
-1. `VitalsGraphView.swift`:
+### 5.3 Vitals Segment
+1. `VitalsReportView.swift`:
    - Toggle buttons for: Weight, BP, HR, Glucose
    - Date range picker
 
@@ -193,32 +191,75 @@ See `docs/doseday/07_GRAPHS_SPECS.md`
    - PointMark + LineMark per metric
    - RuleMark for protocol start/end markers
 
+### 5.4 Labs Segment
+1. `LabsReportView.swift`:
+   - Metric selector
+   - Date range picker
+   - Reference range bands
+   - "Add Labs" button → Tools > Labs Entry
+
 ---
 
-## Phase 6: Settings + Polish
+## Phase 6: Tools Tab
 
-### 6.1 Settings View
-1. `SettingsView.swift`:
-   - Notification permission status + toggle
-   - Default reminder settings
-   - Units preferences (kg/lb, mmol/L vs mg/dL)
-   - Test notification button
-   - Export data (optional)
+### 6.1 Tools List View
+`ToolsView.swift`:
+- List with navigation links to each tool
+- Settings section at bottom
 
-### 6.2 Polish
+### 6.2 Labs Entry
+`LabsEntryView.swift`:
+- Date picker
+- Dynamic form for common lab markers
+- Custom marker support
+- Save to LabEntry model
+
+### 6.3 Reconstitution Calculator
+`ReconstitutionCalculatorView.swift`:
+- Powder amount input
+- BAC water volume input
+- Concentration output table
+- Dose → volume calculator
+
+### 6.4 Insights
+`InsightsView.swift`:
+- AI-generated observations (placeholder for v1)
+- Adherence summary
+- Vitals trends summary
+- Refresh button
+
+### 6.5 Export
+`ExportView.swift`:
+- Format picker (CSV/JSON)
+- Data type selection
+- Share sheet integration
+
+### 6.6 Settings
+`SettingsView.swift`:
+- Notification permission status + toggle
+- Default reminder settings
+- Unit preferences (kg/lb, glucose units)
+- Test notification button
+- About section with disclaimer
+
+---
+
+## Phase 7: Polish
+
 - Dark mode support (automatic via SwiftUI)
 - Dynamic Type support
 - VoiceOver labels on interactive elements
-- Empty states for: no protocols, no events, no vitals
+- Empty states for: no protocols, no events, no vitals, no labs
 - Safety disclaimer in About section
+- Loading states and error handling
 
 ---
 
-## Phase 7: Testing
+## Phase 8: Testing
 
 See `docs/doseday/10_TESTING_QA.md`
 
-### 7.1 Unit Tests
+### 8.1 Unit Tests
 - `SchedulingServiceTests.swift`:
   - Daily schedule generates correct times
   - Weekday schedule filters correctly
@@ -229,11 +270,16 @@ See `docs/doseday/10_TESTING_QA.md`
   - Monotonic decay between doses
   - Multiple doses sum correctly
 
-### 7.2 UI Tests
+- `ReconstitutionCalculatorTests.swift`:
+  - Concentration calculations accurate
+  - Dose to volume conversions correct
+
+### 8.2 UI Tests
 - Create protocol with 2 drugs
-- Verify calendar shows colored dots
+- Verify schedule shows doses
 - Mark dose taken → verify status updates
-- Add vitals → verify on graph
+- Add vitals → verify on Reports
+- Add labs → verify on Reports
 
 ---
 
@@ -242,12 +288,13 @@ See `docs/doseday/10_TESTING_QA.md`
 | Phase | Components | Dependencies |
 |-------|-----------|--------------|
 | 1 | Models + Scheduling | None |
-| 2 | Calendar + Day Views | Phase 1 |
+| 2 | Schedule Tab | Phase 1 |
 | 3 | Protocol Management | Phase 1 |
 | 4 | Notifications | Phase 1, 3 |
-| 5 | Graphs | Phase 1, 2 |
-| 6 | Settings + Polish | Phase 4 |
-| 7 | Testing | All phases |
+| 5 | Reports Tab | Phase 1, 2 |
+| 6 | Tools Tab | Phase 1 |
+| 7 | Polish | All phases |
+| 8 | Testing | All phases |
 
 ---
 
